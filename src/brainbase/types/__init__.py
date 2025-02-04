@@ -3,4 +3,3 @@
 from __future__ import annotations
 
 from .worker_create_params import WorkerCreateParams as WorkerCreateParams
-from .worker_create_id_params import WorkerCreateIDParams as WorkerCreateIDParams

@@ -12,7 +12,7 @@ from .flows import (
     FlowsResourceWithStreamingResponse,
     AsyncFlowsResourceWithStreamingResponse,
 )
-from ...types import worker_create_params, worker_create_id_params
+from ...types import worker_create_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -69,9 +69,10 @@ class WorkersResource(SyncAPIResource):
 
     def create(
         self,
+        id: str,
         *,
-        name: str,
         description: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         status: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -81,7 +82,7 @@ class WorkersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Create a new worker
+        Update a worker
 
         Args:
           extra_headers: Send extra headers
@@ -92,13 +93,15 @@ class WorkersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            "/api/workers",
+            f"/api/workers/{id}",
             body=maybe_transform(
                 {
-                    "name": name,
                     "description": description,
+                    "name": name,
                     "status": status,
                 },
                 worker_create_params.WorkerCreateParams,
@@ -163,52 +166,7 @@ class WorkersResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
-    def create_id(
-        self,
-        id: str,
-        *,
-        description: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        status: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
-        """
-        Update a worker
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return self._post(
-            f"/api/workers/{id}",
-            body=maybe_transform(
-                {
-                    "description": description,
-                    "name": name,
-                    "status": status,
-                },
-                worker_create_id_params.WorkerCreateIDParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
-        )
-
-    def delete_id(
+    def delete(
         self,
         id: str,
         *,
@@ -273,9 +231,10 @@ class AsyncWorkersResource(AsyncAPIResource):
 
     async def create(
         self,
+        id: str,
         *,
-        name: str,
         description: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         status: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -285,7 +244,7 @@ class AsyncWorkersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Create a new worker
+        Update a worker
 
         Args:
           extra_headers: Send extra headers
@@ -296,13 +255,15 @@ class AsyncWorkersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            "/api/workers",
+            f"/api/workers/{id}",
             body=await async_maybe_transform(
                 {
-                    "name": name,
                     "description": description,
+                    "name": name,
                     "status": status,
                 },
                 worker_create_params.WorkerCreateParams,
@@ -367,52 +328,7 @@ class AsyncWorkersResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
-    async def create_id(
-        self,
-        id: str,
-        *,
-        description: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        status: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
-        """
-        Update a worker
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return await self._post(
-            f"/api/workers/{id}",
-            body=await async_maybe_transform(
-                {
-                    "description": description,
-                    "name": name,
-                    "status": status,
-                },
-                worker_create_id_params.WorkerCreateIDParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
-        )
-
-    async def delete_id(
+    async def delete(
         self,
         id: str,
         *,
@@ -460,11 +376,8 @@ class WorkersResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             workers.list,
         )
-        self.create_id = to_raw_response_wrapper(
-            workers.create_id,
-        )
-        self.delete_id = to_raw_response_wrapper(
-            workers.delete_id,
+        self.delete = to_raw_response_wrapper(
+            workers.delete,
         )
 
     @cached_property
@@ -489,11 +402,8 @@ class AsyncWorkersResourceWithRawResponse:
         self.list = async_to_raw_response_wrapper(
             workers.list,
         )
-        self.create_id = async_to_raw_response_wrapper(
-            workers.create_id,
-        )
-        self.delete_id = async_to_raw_response_wrapper(
-            workers.delete_id,
+        self.delete = async_to_raw_response_wrapper(
+            workers.delete,
         )
 
     @cached_property
@@ -518,11 +428,8 @@ class WorkersResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             workers.list,
         )
-        self.create_id = to_streamed_response_wrapper(
-            workers.create_id,
-        )
-        self.delete_id = to_streamed_response_wrapper(
-            workers.delete_id,
+        self.delete = to_streamed_response_wrapper(
+            workers.delete,
         )
 
     @cached_property
@@ -547,11 +454,8 @@ class AsyncWorkersResourceWithStreamingResponse:
         self.list = async_to_streamed_response_wrapper(
             workers.list,
         )
-        self.create_id = async_to_streamed_response_wrapper(
-            workers.create_id,
-        )
-        self.delete_id = async_to_streamed_response_wrapper(
-            workers.delete_id,
+        self.delete = async_to_streamed_response_wrapper(
+            workers.delete,
         )
 
     @cached_property
