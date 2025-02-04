@@ -10,7 +10,7 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [docs.brainbase.com](https://docs.brainbase.com). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.usebrainbase.com](https://docs.usebrainbase.com). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
