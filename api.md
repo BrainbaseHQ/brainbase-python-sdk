@@ -2,6 +2,7 @@
 
 Methods:
 
+- <code title="post /api/workers">client.workers.<a href="./src/brainbase/resources/workers/workers.py">create</a>(\*\*<a href="src/brainbase/types/worker_create_params.py">params</a>) -> None</code>
 - <code title="get /api/workers/{id}">client.workers.<a href="./src/brainbase/resources/workers/workers.py">retrieve</a>(id) -> None</code>
 - <code title="post /api/workers/{id}">client.workers.<a href="./src/brainbase/resources/workers/workers.py">update</a>(id, \*\*<a href="src/brainbase/types/worker_update_params.py">params</a>) -> None</code>
 - <code title="get /api/workers">client.workers.<a href="./src/brainbase/resources/workers/workers.py">list</a>() -> None</code>
@@ -28,9 +29,3 @@ Methods:
 - <code title="put /api/workers/{workerId}/flows/{flowId}">client.workers.flows.<a href="./src/brainbase/resources/workers/flows.py">update</a>(flow_id, \*, worker_id, \*\*<a href="src/brainbase/types/workers/flow_update_params.py">params</a>) -> None</code>
 - <code title="get /api/workers/{workerId}/flows">client.workers.flows.<a href="./src/brainbase/resources/workers/flows.py">list</a>(worker_id) -> None</code>
 - <code title="delete /api/workers/{workerId}/flows/{flowId}">client.workers.flows.<a href="./src/brainbase/resources/workers/flows.py">delete</a>(flow_id, \*, worker_id) -> None</code>
-
-## Create
-
-Methods:
-
-- <code title="post /api/workers/{id}">client.workers.create.<a href="./src/brainbase/resources/workers/create.py">new</a>(id, \*\*<a href="src/brainbase/types/workers/create_new_params.py">params</a>) -> None</code>
