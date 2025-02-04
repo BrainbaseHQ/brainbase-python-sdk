@@ -31,7 +31,7 @@ client = Brainbase(
     api_key=os.environ.get("API_KEY"),  # This is the default and can be omitted
 )
 
-client.workers.list()
+workers = client.workers.list()
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -54,7 +54,7 @@ client = AsyncBrainbase(
 
 
 async def main() -> None:
-    await client.workers.list()
+    workers = await client.workers.list()
 
 
 asyncio.run(main())

@@ -8,8 +8,4 @@ __all__ = ["FlowCreateParams"]
 
 
 class FlowCreateParams(TypedDict, total=False):
-    name: Required[str]
-
-    code: str
-
-    label: str
+    body: Required[object]
