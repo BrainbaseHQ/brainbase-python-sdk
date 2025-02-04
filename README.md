@@ -10,13 +10,13 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [docs.usebrainbase.com](https://docs.usebrainbase.com). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.brainbase.com](https://docs.brainbase.com). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
 ```sh
 # install from PyPI
-pip install --pre brainbase-labs
+pip install brainbase-labs
 ```
 
 ## Usage
@@ -28,7 +28,7 @@ import os
 from brainbase import Brainbase
 
 client = Brainbase(
-    api_key=os.environ.get("BRAINBASE_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("API_KEY"),  # This is the default and can be omitted
 )
 
 client.workers.list()
@@ -36,7 +36,7 @@ client.workers.list()
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `BRAINBASE_API_KEY="My API Key"` to your `.env` file
+to add `API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -49,7 +49,7 @@ import asyncio
 from brainbase import AsyncBrainbase
 
 client = AsyncBrainbase(
-    api_key=os.environ.get("BRAINBASE_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("API_KEY"),  # This is the default and can be omitted
 )
 
 

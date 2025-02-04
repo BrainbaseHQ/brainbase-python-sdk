@@ -340,7 +340,7 @@ class TestBrainbase:
         assert request.headers.get("x-api-key") == api_key
 
         with pytest.raises(BrainbaseError):
-            with update_env(**{"BRAINBASE_API_KEY": Omit()}):
+            with update_env(**{"API_KEY": Omit()}):
                 client2 = Brainbase(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -1096,7 +1096,7 @@ class TestAsyncBrainbase:
         assert request.headers.get("x-api-key") == api_key
 
         with pytest.raises(BrainbaseError):
-            with update_env(**{"BRAINBASE_API_KEY": Omit()}):
+            with update_env(**{"API_KEY": Omit()}):
                 client2 = AsyncBrainbase(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
