@@ -1,5 +1,5 @@
 [project]
-name = "brainbase"
+name = "brainbase-labs"
 version = "1.0.0"
 description = "The official Python library for the brainbase API"
 dynamic = ["readme"]
