@@ -1,6 +1,6 @@
 # Brainbase Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/brainbase.svg)](https://pypi.org/project/brainbase/)
+[![PyPI version](https://img.shields.io/pypi/v/brainbase-labs.svg)](https://pypi.org/project/brainbase-labs/)
 
 The Brainbase Python library provides convenient access to the Brainbase REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -16,7 +16,7 @@ The REST API documentation can be found on [docs.brainbase.com](https://docs.bra
 
 ```sh
 # install from PyPI
-pip install brainbase
+pip install brainbase-labs
 ```
 
 ## Usage
