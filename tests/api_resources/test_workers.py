@@ -19,7 +19,7 @@ class TestWorkers:
     @parametrize
     def test_method_create(self, client: Brainbase) -> None:
         worker = client.workers.create(
-            id="id",
+            name="name",
         )
         assert worker is None
 
@@ -27,9 +27,8 @@ class TestWorkers:
     @parametrize
     def test_method_create_with_all_params(self, client: Brainbase) -> None:
         worker = client.workers.create(
-            id="id",
-            description="description",
             name="name",
+            description="description",
             status="status",
         )
         assert worker is None
@@ -38,7 +37,7 @@ class TestWorkers:
     @parametrize
     def test_raw_response_create(self, client: Brainbase) -> None:
         response = client.workers.with_raw_response.create(
-            id="id",
+            name="name",
         )
 
         assert response.is_closed is True
@@ -50,7 +49,7 @@ class TestWorkers:
     @parametrize
     def test_streaming_response_create(self, client: Brainbase) -> None:
         with client.workers.with_streaming_response.create(
-            id="id",
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -59,14 +58,6 @@ class TestWorkers:
             assert worker is None
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_path_params_create(self, client: Brainbase) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.workers.with_raw_response.create(
-                id="",
-            )
 
     @pytest.mark.skip()
     @parametrize
@@ -140,16 +131,69 @@ class TestWorkers:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_delete(self, client: Brainbase) -> None:
-        worker = client.workers.delete(
+    def test_method_create_id(self, client: Brainbase) -> None:
+        worker = client.workers.create_id(
+            id="id",
+        )
+        assert worker is None
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_create_id_with_all_params(self, client: Brainbase) -> None:
+        worker = client.workers.create_id(
+            id="id",
+            description="description",
+            name="name",
+            status="status",
+        )
+        assert worker is None
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_create_id(self, client: Brainbase) -> None:
+        response = client.workers.with_raw_response.create_id(
+            id="id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        worker = response.parse()
+        assert worker is None
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_create_id(self, client: Brainbase) -> None:
+        with client.workers.with_streaming_response.create_id(
+            id="id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            worker = response.parse()
+            assert worker is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_path_params_create_id(self, client: Brainbase) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.workers.with_raw_response.create_id(
+                id="",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_delete_id(self, client: Brainbase) -> None:
+        worker = client.workers.delete_id(
             "id",
         )
         assert worker is None
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_delete(self, client: Brainbase) -> None:
-        response = client.workers.with_raw_response.delete(
+    def test_raw_response_delete_id(self, client: Brainbase) -> None:
+        response = client.workers.with_raw_response.delete_id(
             "id",
         )
 
@@ -160,8 +204,8 @@ class TestWorkers:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_delete(self, client: Brainbase) -> None:
-        with client.workers.with_streaming_response.delete(
+    def test_streaming_response_delete_id(self, client: Brainbase) -> None:
+        with client.workers.with_streaming_response.delete_id(
             "id",
         ) as response:
             assert not response.is_closed
@@ -174,9 +218,9 @@ class TestWorkers:
 
     @pytest.mark.skip()
     @parametrize
-    def test_path_params_delete(self, client: Brainbase) -> None:
+    def test_path_params_delete_id(self, client: Brainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.workers.with_raw_response.delete(
+            client.workers.with_raw_response.delete_id(
                 "",
             )
 
@@ -188,7 +232,7 @@ class TestAsyncWorkers:
     @parametrize
     async def test_method_create(self, async_client: AsyncBrainbase) -> None:
         worker = await async_client.workers.create(
-            id="id",
+            name="name",
         )
         assert worker is None
 
@@ -196,9 +240,8 @@ class TestAsyncWorkers:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncBrainbase) -> None:
         worker = await async_client.workers.create(
-            id="id",
-            description="description",
             name="name",
+            description="description",
             status="status",
         )
         assert worker is None
@@ -207,7 +250,7 @@ class TestAsyncWorkers:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.with_raw_response.create(
-            id="id",
+            name="name",
         )
 
         assert response.is_closed is True
@@ -219,7 +262,7 @@ class TestAsyncWorkers:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.with_streaming_response.create(
-            id="id",
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -228,14 +271,6 @@ class TestAsyncWorkers:
             assert worker is None
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_path_params_create(self, async_client: AsyncBrainbase) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.workers.with_raw_response.create(
-                id="",
-            )
 
     @pytest.mark.skip()
     @parametrize
@@ -309,16 +344,69 @@ class TestAsyncWorkers:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_delete(self, async_client: AsyncBrainbase) -> None:
-        worker = await async_client.workers.delete(
+    async def test_method_create_id(self, async_client: AsyncBrainbase) -> None:
+        worker = await async_client.workers.create_id(
+            id="id",
+        )
+        assert worker is None
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_create_id_with_all_params(self, async_client: AsyncBrainbase) -> None:
+        worker = await async_client.workers.create_id(
+            id="id",
+            description="description",
+            name="name",
+            status="status",
+        )
+        assert worker is None
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_create_id(self, async_client: AsyncBrainbase) -> None:
+        response = await async_client.workers.with_raw_response.create_id(
+            id="id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        worker = await response.parse()
+        assert worker is None
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_create_id(self, async_client: AsyncBrainbase) -> None:
+        async with async_client.workers.with_streaming_response.create_id(
+            id="id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            worker = await response.parse()
+            assert worker is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_path_params_create_id(self, async_client: AsyncBrainbase) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.workers.with_raw_response.create_id(
+                id="",
+            )
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_delete_id(self, async_client: AsyncBrainbase) -> None:
+        worker = await async_client.workers.delete_id(
             "id",
         )
         assert worker is None
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_delete(self, async_client: AsyncBrainbase) -> None:
-        response = await async_client.workers.with_raw_response.delete(
+    async def test_raw_response_delete_id(self, async_client: AsyncBrainbase) -> None:
+        response = await async_client.workers.with_raw_response.delete_id(
             "id",
         )
 
@@ -329,8 +417,8 @@ class TestAsyncWorkers:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_delete(self, async_client: AsyncBrainbase) -> None:
-        async with async_client.workers.with_streaming_response.delete(
+    async def test_streaming_response_delete_id(self, async_client: AsyncBrainbase) -> None:
+        async with async_client.workers.with_streaming_response.delete_id(
             "id",
         ) as response:
             assert not response.is_closed
@@ -343,8 +431,8 @@ class TestAsyncWorkers:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_path_params_delete(self, async_client: AsyncBrainbase) -> None:
+    async def test_path_params_delete_id(self, async_client: AsyncBrainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.workers.with_raw_response.delete(
+            await async_client.workers.with_raw_response.delete_id(
                 "",
             )
