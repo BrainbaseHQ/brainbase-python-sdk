@@ -1,6 +1,6 @@
 # Brainbase Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/brainbase-labs.svg)](https://pypi.org/project/brainbase-labs/)
+[![PyPI version](https://img.shields.io/pypi/v/brainbase.svg)](https://pypi.org/project/brainbase/)
 
 The Brainbase Python library provides convenient access to the Brainbase REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -15,41 +15,37 @@ The REST API documentation can be found on [docs.brainbase.com](https://docs.bra
 ## Installation
 
 ```sh
-# install from PyPI
-pip install brainbase-labs
+# install from this staging repo
+pip install git+ssh://git@github.com/stainless-sdks/brainbase-python.git
 ```
+
+> [!NOTE]
+> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre brainbase`
 
 ## Usage
 
 The full API of this library can be found in [api.md](api.md).
 
 ```python
-import os
 from brainbase import Brainbase
 
 client = Brainbase(
-    api_key=os.environ.get("BRAINBASE_API_KEY"),  # This is the default and can be omitted
+    api_key="My API Key",
 )
 
 client.workers.list()
 ```
-
-While you can provide an `api_key` keyword argument,
-we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `BRAINBASE_API_KEY="My API Key"` to your `.env` file
-so that your API Key is not stored in source control.
 
 ## Async usage
 
 Simply import `AsyncBrainbase` instead of `Brainbase` and use `await` with each API call:
 
 ```python
-import os
 import asyncio
 from brainbase import AsyncBrainbase
 
 client = AsyncBrainbase(
-    api_key=os.environ.get("BRAINBASE_API_KEY"),  # This is the default and can be omitted
+    api_key="My API Key",
 )
 
 
@@ -84,7 +80,9 @@ All errors inherit from `brainbase.APIError`.
 import brainbase
 from brainbase import Brainbase
 
-client = Brainbase()
+client = Brainbase(
+    api_key="My API Key",
+)
 
 try:
     client.workers.list()
@@ -127,6 +125,7 @@ from brainbase import Brainbase
 client = Brainbase(
     # default is 2
     max_retries=0,
+    api_key="My API Key",
 )
 
 # Or, configure per-request:
@@ -145,11 +144,13 @@ from brainbase import Brainbase
 client = Brainbase(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
+    api_key="My API Key",
 )
 
 # More granular control:
 client = Brainbase(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
+    api_key="My API Key",
 )
 
 # Override per-request:
@@ -193,7 +194,9 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 ```py
 from brainbase import Brainbase
 
-client = Brainbase()
+client = Brainbase(
+    api_key="My API Key",
+)
 response = client.workers.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
@@ -201,9 +204,9 @@ worker = response.parse()  # get the object that `workers.list()` would have ret
 print(worker)
 ```
 
-These methods return an [`APIResponse`](https://github.com/BrainbaseHQ/brainbase-python-sdk/tree/main/src/brainbase/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/stainless-sdks/brainbase-python/tree/main/src/brainbase/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/BrainbaseHQ/brainbase-python-sdk/tree/main/src/brainbase/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/brainbase-python/tree/main/src/brainbase/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -274,6 +277,7 @@ client = Brainbase(
         proxy="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
+    api_key="My API Key",
 )
 ```
 
@@ -290,7 +294,9 @@ By default the library closes underlying HTTP connections whenever the client is
 ```py
 from brainbase import Brainbase
 
-with Brainbase() as client:
+with Brainbase(
+    api_key="My API Key",
+) as client:
   # make requests here
   ...
 
@@ -307,7 +313,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/BrainbaseHQ/brainbase-python-sdk/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/brainbase-python/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 
