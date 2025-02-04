@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0 (2025-02-04)
+
+Full Changelog: [v1.0.1...v1.1.0](https://github.com/BrainbaseHQ/brainbase-python-sdk/compare/v1.0.1...v1.1.0)
+
+### Features
+
+* **api:** update via SDK Studio ([#10](https://github.com/BrainbaseHQ/brainbase-python-sdk/issues/10)) ([4fb75c8](https://github.com/BrainbaseHQ/brainbase-python-sdk/commit/4fb75c8c78c172cb0a80be304334803956968247))
+* **api:** update via SDK Studio ([#8](https://github.com/BrainbaseHQ/brainbase-python-sdk/issues/8)) ([312b657](https://github.com/BrainbaseHQ/brainbase-python-sdk/commit/312b657cf73569a314b3c64ed83521ca2bb576a5))
+
 ## 1.0.1 (2025-02-04)
 
 Full Changelog: [v1.0.0...v1.0.1](https://github.com/BrainbaseHQ/brainbase-python-sdk/compare/v1.0.0...v1.0.1)
