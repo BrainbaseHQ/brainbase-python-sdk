@@ -10,7 +10,7 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [docs.usebrainbase.com](https://docs.usebrainbase.com). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.brainbase.com](https://docs.brainbase.com). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
@@ -24,32 +24,25 @@ pip install --pre brainbase-labs
 The full API of this library can be found in [api.md](api.md).
 
 ```python
-import os
 from brainbase import Brainbase
 
 client = Brainbase(
-    api_key=os.environ.get("BRAINBASE_API_KEY"),  # This is the default and can be omitted
+    bearer_token="My Bearer Token",
 )
 
 client.workers.list()
 ```
-
-While you can provide an `api_key` keyword argument,
-we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `BRAINBASE_API_KEY="My API Key"` to your `.env` file
-so that your API Key is not stored in source control.
 
 ## Async usage
 
 Simply import `AsyncBrainbase` instead of `Brainbase` and use `await` with each API call:
 
 ```python
-import os
 import asyncio
 from brainbase import AsyncBrainbase
 
 client = AsyncBrainbase(
-    api_key=os.environ.get("BRAINBASE_API_KEY"),  # This is the default and can be omitted
+    bearer_token="My Bearer Token",
 )
 
 
@@ -84,7 +77,9 @@ All errors inherit from `brainbase.APIError`.
 import brainbase
 from brainbase import Brainbase
 
-client = Brainbase()
+client = Brainbase(
+    bearer_token="My Bearer Token",
+)
 
 try:
     client.workers.list()
@@ -127,6 +122,7 @@ from brainbase import Brainbase
 client = Brainbase(
     # default is 2
     max_retries=0,
+    bearer_token="My Bearer Token",
 )
 
 # Or, configure per-request:
@@ -145,11 +141,13 @@ from brainbase import Brainbase
 client = Brainbase(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
+    bearer_token="My Bearer Token",
 )
 
 # More granular control:
 client = Brainbase(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
+    bearer_token="My Bearer Token",
 )
 
 # Override per-request:
@@ -193,7 +191,9 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 ```py
 from brainbase import Brainbase
 
-client = Brainbase()
+client = Brainbase(
+    bearer_token="My Bearer Token",
+)
 response = client.workers.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
@@ -274,6 +274,7 @@ client = Brainbase(
         proxy="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
+    bearer_token="My Bearer Token",
 )
 ```
 
@@ -290,7 +291,9 @@ By default the library closes underlying HTTP connections whenever the client is
 ```py
 from brainbase import Brainbase
 
-with Brainbase() as client:
+with Brainbase(
+    bearer_token="My Bearer Token",
+) as client:
   # make requests here
   ...
 
