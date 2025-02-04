@@ -27,7 +27,19 @@ class TestFlows:
     def test_method_create(self, client: Brainbase) -> None:
         flow = client.workers.flows.create(
             worker_id="workerId",
-            body={},
+            code="code",
+            name="name",
+        )
+        assert_matches_type(FlowCreateResponse, flow, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_create_with_all_params(self, client: Brainbase) -> None:
+        flow = client.workers.flows.create(
+            worker_id="workerId",
+            code="code",
+            name="name",
+            label="label",
         )
         assert_matches_type(FlowCreateResponse, flow, path=["response"])
 
@@ -36,7 +48,8 @@ class TestFlows:
     def test_raw_response_create(self, client: Brainbase) -> None:
         response = client.workers.flows.with_raw_response.create(
             worker_id="workerId",
-            body={},
+            code="code",
+            name="name",
         )
 
         assert response.is_closed is True
@@ -49,7 +62,8 @@ class TestFlows:
     def test_streaming_response_create(self, client: Brainbase) -> None:
         with client.workers.flows.with_streaming_response.create(
             worker_id="workerId",
-            body={},
+            code="code",
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -65,7 +79,8 @@ class TestFlows:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
             client.workers.flows.with_raw_response.create(
                 worker_id="",
-                body={},
+                code="code",
+                name="name",
             )
 
     @pytest.mark.skip()
@@ -126,7 +141,18 @@ class TestFlows:
         flow = client.workers.flows.update(
             flow_id="flowId",
             worker_id="workerId",
-            body={},
+        )
+        assert_matches_type(FlowUpdateResponse, flow, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_update_with_all_params(self, client: Brainbase) -> None:
+        flow = client.workers.flows.update(
+            flow_id="flowId",
+            worker_id="workerId",
+            code="code",
+            label="label",
+            name="name",
         )
         assert_matches_type(FlowUpdateResponse, flow, path=["response"])
 
@@ -136,7 +162,6 @@ class TestFlows:
         response = client.workers.flows.with_raw_response.update(
             flow_id="flowId",
             worker_id="workerId",
-            body={},
         )
 
         assert response.is_closed is True
@@ -150,7 +175,6 @@ class TestFlows:
         with client.workers.flows.with_streaming_response.update(
             flow_id="flowId",
             worker_id="workerId",
-            body={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -167,14 +191,12 @@ class TestFlows:
             client.workers.flows.with_raw_response.update(
                 flow_id="flowId",
                 worker_id="",
-                body={},
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `flow_id` but received ''"):
             client.workers.flows.with_raw_response.update(
                 flow_id="",
                 worker_id="workerId",
-                body={},
             )
 
     @pytest.mark.skip()
@@ -280,7 +302,19 @@ class TestAsyncFlows:
     async def test_method_create(self, async_client: AsyncBrainbase) -> None:
         flow = await async_client.workers.flows.create(
             worker_id="workerId",
-            body={},
+            code="code",
+            name="name",
+        )
+        assert_matches_type(FlowCreateResponse, flow, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncBrainbase) -> None:
+        flow = await async_client.workers.flows.create(
+            worker_id="workerId",
+            code="code",
+            name="name",
+            label="label",
         )
         assert_matches_type(FlowCreateResponse, flow, path=["response"])
 
@@ -289,7 +323,8 @@ class TestAsyncFlows:
     async def test_raw_response_create(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.flows.with_raw_response.create(
             worker_id="workerId",
-            body={},
+            code="code",
+            name="name",
         )
 
         assert response.is_closed is True
@@ -302,7 +337,8 @@ class TestAsyncFlows:
     async def test_streaming_response_create(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.flows.with_streaming_response.create(
             worker_id="workerId",
-            body={},
+            code="code",
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -318,7 +354,8 @@ class TestAsyncFlows:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
             await async_client.workers.flows.with_raw_response.create(
                 worker_id="",
-                body={},
+                code="code",
+                name="name",
             )
 
     @pytest.mark.skip()
@@ -379,7 +416,18 @@ class TestAsyncFlows:
         flow = await async_client.workers.flows.update(
             flow_id="flowId",
             worker_id="workerId",
-            body={},
+        )
+        assert_matches_type(FlowUpdateResponse, flow, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncBrainbase) -> None:
+        flow = await async_client.workers.flows.update(
+            flow_id="flowId",
+            worker_id="workerId",
+            code="code",
+            label="label",
+            name="name",
         )
         assert_matches_type(FlowUpdateResponse, flow, path=["response"])
 
@@ -389,7 +437,6 @@ class TestAsyncFlows:
         response = await async_client.workers.flows.with_raw_response.update(
             flow_id="flowId",
             worker_id="workerId",
-            body={},
         )
 
         assert response.is_closed is True
@@ -403,7 +450,6 @@ class TestAsyncFlows:
         async with async_client.workers.flows.with_streaming_response.update(
             flow_id="flowId",
             worker_id="workerId",
-            body={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -420,14 +466,12 @@ class TestAsyncFlows:
             await async_client.workers.flows.with_raw_response.update(
                 flow_id="flowId",
                 worker_id="",
-                body={},
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `flow_id` but received ''"):
             await async_client.workers.flows.with_raw_response.update(
                 flow_id="",
                 worker_id="workerId",
-                body={},
             )
 
     @pytest.mark.skip()
