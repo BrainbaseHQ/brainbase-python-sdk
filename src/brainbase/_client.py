@@ -78,13 +78,13 @@ class Brainbase(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous brainbase client instance.
 
-        This automatically infers the `api_key` argument from the `API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `BRAINBASE_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("API_KEY")
+            api_key = os.environ.get("BRAINBASE_API_KEY")
         if api_key is None:
             raise BrainbaseError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the API_KEY environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the BRAINBASE_API_KEY environment variable"
             )
         self.api_key = api_key
 
@@ -112,6 +112,12 @@ class Brainbase(SyncAPIClient):
     @override
     def qs(self) -> Querystring:
         return Querystring(array_format="comma")
+
+    @property
+    @override
+    def auth_headers(self) -> dict[str, str]:
+        api_key = self.api_key
+        return {"x-api-key": api_key}
 
     @property
     @override
@@ -240,13 +246,13 @@ class AsyncBrainbase(AsyncAPIClient):
     ) -> None:
         """Construct a new async brainbase client instance.
 
-        This automatically infers the `api_key` argument from the `API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `BRAINBASE_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("API_KEY")
+            api_key = os.environ.get("BRAINBASE_API_KEY")
         if api_key is None:
             raise BrainbaseError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the API_KEY environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the BRAINBASE_API_KEY environment variable"
             )
         self.api_key = api_key
 
@@ -274,6 +280,12 @@ class AsyncBrainbase(AsyncAPIClient):
     @override
     def qs(self) -> Querystring:
         return Querystring(array_format="comma")
+
+    @property
+    @override
+    def auth_headers(self) -> dict[str, str]:
+        api_key = self.api_key
+        return {"x-api-key": api_key}
 
     @property
     @override
