@@ -12,15 +12,7 @@ from .flows import (
     FlowsResourceWithStreamingResponse,
     AsyncFlowsResourceWithStreamingResponse,
 )
-from .create import (
-    CreateResource,
-    AsyncCreateResource,
-    CreateResourceWithRawResponse,
-    AsyncCreateResourceWithRawResponse,
-    CreateResourceWithStreamingResponse,
-    AsyncCreateResourceWithStreamingResponse,
-)
-from ...types import worker_update_params
+from ...types import worker_create_params, worker_update_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -57,10 +49,6 @@ class WorkersResource(SyncAPIResource):
         return FlowsResource(self._client)
 
     @cached_property
-    def create(self) -> CreateResource:
-        return CreateResource(self._client)
-
-    @cached_property
     def with_raw_response(self) -> WorkersResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -78,6 +66,48 @@ class WorkersResource(SyncAPIResource):
         For more information, see https://www.github.com/BrainbaseHQ/brainbase-python-sdk#with_streaming_response
         """
         return WorkersResourceWithStreamingResponse(self)
+
+    def create(
+        self,
+        *,
+        name: str,
+        description: str | NotGiven = NOT_GIVEN,
+        status: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Create a new worker
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            "/api/workers",
+            body=maybe_transform(
+                {
+                    "name": name,
+                    "description": description,
+                    "status": status,
+                },
+                worker_create_params.WorkerCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
 
     def retrieve(
         self,
@@ -223,10 +253,6 @@ class AsyncWorkersResource(AsyncAPIResource):
         return AsyncFlowsResource(self._client)
 
     @cached_property
-    def create(self) -> AsyncCreateResource:
-        return AsyncCreateResource(self._client)
-
-    @cached_property
     def with_raw_response(self) -> AsyncWorkersResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -244,6 +270,48 @@ class AsyncWorkersResource(AsyncAPIResource):
         For more information, see https://www.github.com/BrainbaseHQ/brainbase-python-sdk#with_streaming_response
         """
         return AsyncWorkersResourceWithStreamingResponse(self)
+
+    async def create(
+        self,
+        *,
+        name: str,
+        description: str | NotGiven = NOT_GIVEN,
+        status: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Create a new worker
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            "/api/workers",
+            body=await async_maybe_transform(
+                {
+                    "name": name,
+                    "description": description,
+                    "status": status,
+                },
+                worker_create_params.WorkerCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
 
     async def retrieve(
         self,
@@ -383,6 +451,9 @@ class WorkersResourceWithRawResponse:
     def __init__(self, workers: WorkersResource) -> None:
         self._workers = workers
 
+        self.create = to_raw_response_wrapper(
+            workers.create,
+        )
         self.retrieve = to_raw_response_wrapper(
             workers.retrieve,
         )
@@ -404,15 +475,14 @@ class WorkersResourceWithRawResponse:
     def flows(self) -> FlowsResourceWithRawResponse:
         return FlowsResourceWithRawResponse(self._workers.flows)
 
-    @cached_property
-    def create(self) -> CreateResourceWithRawResponse:
-        return CreateResourceWithRawResponse(self._workers.create)
-
 
 class AsyncWorkersResourceWithRawResponse:
     def __init__(self, workers: AsyncWorkersResource) -> None:
         self._workers = workers
 
+        self.create = async_to_raw_response_wrapper(
+            workers.create,
+        )
         self.retrieve = async_to_raw_response_wrapper(
             workers.retrieve,
         )
@@ -434,15 +504,14 @@ class AsyncWorkersResourceWithRawResponse:
     def flows(self) -> AsyncFlowsResourceWithRawResponse:
         return AsyncFlowsResourceWithRawResponse(self._workers.flows)
 
-    @cached_property
-    def create(self) -> AsyncCreateResourceWithRawResponse:
-        return AsyncCreateResourceWithRawResponse(self._workers.create)
-
 
 class WorkersResourceWithStreamingResponse:
     def __init__(self, workers: WorkersResource) -> None:
         self._workers = workers
 
+        self.create = to_streamed_response_wrapper(
+            workers.create,
+        )
         self.retrieve = to_streamed_response_wrapper(
             workers.retrieve,
         )
@@ -464,15 +533,14 @@ class WorkersResourceWithStreamingResponse:
     def flows(self) -> FlowsResourceWithStreamingResponse:
         return FlowsResourceWithStreamingResponse(self._workers.flows)
 
-    @cached_property
-    def create(self) -> CreateResourceWithStreamingResponse:
-        return CreateResourceWithStreamingResponse(self._workers.create)
-
 
 class AsyncWorkersResourceWithStreamingResponse:
     def __init__(self, workers: AsyncWorkersResource) -> None:
         self._workers = workers
 
+        self.create = async_to_streamed_response_wrapper(
+            workers.create,
+        )
         self.retrieve = async_to_streamed_response_wrapper(
             workers.retrieve,
         )
@@ -493,7 +561,3 @@ class AsyncWorkersResourceWithStreamingResponse:
     @cached_property
     def flows(self) -> AsyncFlowsResourceWithStreamingResponse:
         return AsyncFlowsResourceWithStreamingResponse(self._workers.flows)
-
-    @cached_property
-    def create(self) -> AsyncCreateResourceWithStreamingResponse:
-        return AsyncCreateResourceWithStreamingResponse(self._workers.create)

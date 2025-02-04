@@ -17,6 +17,50 @@ class TestWorkers:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_create(self, client: Brainbase) -> None:
+        worker = client.workers.create(
+            name="name",
+        )
+        assert worker is None
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_create_with_all_params(self, client: Brainbase) -> None:
+        worker = client.workers.create(
+            name="name",
+            description="description",
+            status="status",
+        )
+        assert worker is None
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_create(self, client: Brainbase) -> None:
+        response = client.workers.with_raw_response.create(
+            name="name",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        worker = response.parse()
+        assert worker is None
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_create(self, client: Brainbase) -> None:
+        with client.workers.with_streaming_response.create(
+            name="name",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            worker = response.parse()
+            assert worker is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_retrieve(self, client: Brainbase) -> None:
         worker = client.workers.retrieve(
             "id",
@@ -183,6 +227,50 @@ class TestWorkers:
 
 class TestAsyncWorkers:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_create(self, async_client: AsyncBrainbase) -> None:
+        worker = await async_client.workers.create(
+            name="name",
+        )
+        assert worker is None
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncBrainbase) -> None:
+        worker = await async_client.workers.create(
+            name="name",
+            description="description",
+            status="status",
+        )
+        assert worker is None
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_create(self, async_client: AsyncBrainbase) -> None:
+        response = await async_client.workers.with_raw_response.create(
+            name="name",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        worker = await response.parse()
+        assert worker is None
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_create(self, async_client: AsyncBrainbase) -> None:
+        async with async_client.workers.with_streaming_response.create(
+            name="name",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            worker = await response.parse()
+            assert worker is None
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip()
     @parametrize
