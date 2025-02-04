@@ -19,10 +19,8 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.workers.deployments import voice_create_params, voice_update_params
+from ....types.workers.deployments.voice_deployment import VoiceDeployment
 from ....types.workers.deployments.voice_list_response import VoiceListResponse
-from ....types.workers.deployments.voice_create_response import VoiceCreateResponse
-from ....types.workers.deployments.voice_update_response import VoiceUpdateResponse
-from ....types.workers.deployments.voice_retrieve_response import VoiceRetrieveResponse
 
 __all__ = ["VoiceResource", "AsyncVoiceResource"]
 
@@ -61,7 +59,7 @@ class VoiceResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> VoiceCreateResponse:
+    ) -> VoiceDeployment:
         """
         Create a new voice deployment
 
@@ -98,7 +96,7 @@ class VoiceResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=VoiceCreateResponse,
+            cast_to=VoiceDeployment,
         )
 
     def retrieve(
@@ -112,7 +110,7 @@ class VoiceResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> VoiceRetrieveResponse:
+    ) -> VoiceDeployment:
         """
         Get a single voice deployment
 
@@ -134,7 +132,7 @@ class VoiceResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=VoiceRetrieveResponse,
+            cast_to=VoiceDeployment,
         )
 
     def update(
@@ -152,7 +150,7 @@ class VoiceResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> VoiceUpdateResponse:
+    ) -> VoiceDeployment:
         """
         Update a voice deployment
 
@@ -191,7 +189,7 @@ class VoiceResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=VoiceUpdateResponse,
+            cast_to=VoiceDeployment,
         )
 
     def list(
@@ -299,7 +297,7 @@ class AsyncVoiceResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> VoiceCreateResponse:
+    ) -> VoiceDeployment:
         """
         Create a new voice deployment
 
@@ -336,7 +334,7 @@ class AsyncVoiceResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=VoiceCreateResponse,
+            cast_to=VoiceDeployment,
         )
 
     async def retrieve(
@@ -350,7 +348,7 @@ class AsyncVoiceResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> VoiceRetrieveResponse:
+    ) -> VoiceDeployment:
         """
         Get a single voice deployment
 
@@ -372,7 +370,7 @@ class AsyncVoiceResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=VoiceRetrieveResponse,
+            cast_to=VoiceDeployment,
         )
 
     async def update(
@@ -390,7 +388,7 @@ class AsyncVoiceResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> VoiceUpdateResponse:
+    ) -> VoiceDeployment:
         """
         Update a voice deployment
 
@@ -429,7 +427,7 @@ class AsyncVoiceResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=VoiceUpdateResponse,
+            cast_to=VoiceDeployment,
         )
 
     async def list(
