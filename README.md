@@ -16,7 +16,7 @@ The REST API documentation can be found on [docs.brainbase.com](https://docs.bra
 
 ```sh
 # install from PyPI
-pip install --pre brainbase-labs
+pip install brainbase-labs
 ```
 
 ## Usage
