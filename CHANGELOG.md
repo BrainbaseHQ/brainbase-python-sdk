@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.0.0 (2025-02-04)
+
+Full Changelog: [v3.0.0...v4.0.0](https://github.com/BrainbaseHQ/brainbase-python-sdk/compare/v3.0.0...v4.0.0)
+
+### Features
+
+* **api:** update via SDK Studio ([#58](https://github.com/BrainbaseHQ/brainbase-python-sdk/issues/58)) ([a36fbfd](https://github.com/BrainbaseHQ/brainbase-python-sdk/commit/a36fbfd33d803dcb51826108315826af5dffa6e4))
+
 ## 3.0.0 (2025-02-04)
 
 Full Changelog: [v2.2.0...v3.0.0](https://github.com/BrainbaseHQ/brainbase-python-sdk/compare/v2.2.0...v3.0.0)
