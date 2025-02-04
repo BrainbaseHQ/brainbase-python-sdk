@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
-__all__ = ["WorkerCreateParams"]
+__all__ = ["CreateNewParams"]
 
 
-class WorkerCreateParams(TypedDict, total=False):
-    name: Required[str]
-
+class CreateNewParams(TypedDict, total=False):
     description: str
+
+    name: str
 
     status: str
