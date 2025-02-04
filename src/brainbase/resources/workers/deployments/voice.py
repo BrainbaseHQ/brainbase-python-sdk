@@ -51,7 +51,10 @@ class VoiceResource(SyncAPIResource):
         self,
         worker_id: str,
         *,
-        body: object,
+        name: str,
+        phone_number: str | NotGiven = NOT_GIVEN,
+        voice_id: str | NotGiven = NOT_GIVEN,
+        voice_provider: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -63,6 +66,14 @@ class VoiceResource(SyncAPIResource):
         Create a new voice deployment
 
         Args:
+          name: Name of the voice deployment
+
+          phone_number: Phone number for the voice deployment
+
+          voice_id: Voice ID for the deployment
+
+          voice_provider: Voice provider service
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -75,7 +86,15 @@ class VoiceResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         return self._post(
             f"/api/workers/{worker_id}/deployments/voice",
-            body=maybe_transform(body, voice_create_params.VoiceCreateParams),
+            body=maybe_transform(
+                {
+                    "name": name,
+                    "phone_number": phone_number,
+                    "voice_id": voice_id,
+                    "voice_provider": voice_provider,
+                },
+                voice_create_params.VoiceCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -123,7 +142,10 @@ class VoiceResource(SyncAPIResource):
         deployment_id: str,
         *,
         worker_id: str,
-        body: object,
+        name: str,
+        phone_number: str | NotGiven = NOT_GIVEN,
+        voice_id: str | NotGiven = NOT_GIVEN,
+        voice_provider: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -135,6 +157,14 @@ class VoiceResource(SyncAPIResource):
         Update a voice deployment
 
         Args:
+          name: Name of the voice deployment
+
+          phone_number: Phone number for the voice deployment
+
+          voice_id: Voice ID for the deployment
+
+          voice_provider: Voice provider service
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -149,7 +179,15 @@ class VoiceResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `deployment_id` but received {deployment_id!r}")
         return self._put(
             f"/api/workers/{worker_id}/deployments/voice/{deployment_id}",
-            body=maybe_transform(body, voice_update_params.VoiceUpdateParams),
+            body=maybe_transform(
+                {
+                    "name": name,
+                    "phone_number": phone_number,
+                    "voice_id": voice_id,
+                    "voice_provider": voice_provider,
+                },
+                voice_update_params.VoiceUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -251,7 +289,10 @@ class AsyncVoiceResource(AsyncAPIResource):
         self,
         worker_id: str,
         *,
-        body: object,
+        name: str,
+        phone_number: str | NotGiven = NOT_GIVEN,
+        voice_id: str | NotGiven = NOT_GIVEN,
+        voice_provider: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -263,6 +304,14 @@ class AsyncVoiceResource(AsyncAPIResource):
         Create a new voice deployment
 
         Args:
+          name: Name of the voice deployment
+
+          phone_number: Phone number for the voice deployment
+
+          voice_id: Voice ID for the deployment
+
+          voice_provider: Voice provider service
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -275,7 +324,15 @@ class AsyncVoiceResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         return await self._post(
             f"/api/workers/{worker_id}/deployments/voice",
-            body=await async_maybe_transform(body, voice_create_params.VoiceCreateParams),
+            body=await async_maybe_transform(
+                {
+                    "name": name,
+                    "phone_number": phone_number,
+                    "voice_id": voice_id,
+                    "voice_provider": voice_provider,
+                },
+                voice_create_params.VoiceCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -323,7 +380,10 @@ class AsyncVoiceResource(AsyncAPIResource):
         deployment_id: str,
         *,
         worker_id: str,
-        body: object,
+        name: str,
+        phone_number: str | NotGiven = NOT_GIVEN,
+        voice_id: str | NotGiven = NOT_GIVEN,
+        voice_provider: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -335,6 +395,14 @@ class AsyncVoiceResource(AsyncAPIResource):
         Update a voice deployment
 
         Args:
+          name: Name of the voice deployment
+
+          phone_number: Phone number for the voice deployment
+
+          voice_id: Voice ID for the deployment
+
+          voice_provider: Voice provider service
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -349,7 +417,15 @@ class AsyncVoiceResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `deployment_id` but received {deployment_id!r}")
         return await self._put(
             f"/api/workers/{worker_id}/deployments/voice/{deployment_id}",
-            body=await async_maybe_transform(body, voice_update_params.VoiceUpdateParams),
+            body=await async_maybe_transform(
+                {
+                    "name": name,
+                    "phone_number": phone_number,
+                    "voice_id": voice_id,
+                    "voice_provider": voice_provider,
+                },
+                voice_update_params.VoiceUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

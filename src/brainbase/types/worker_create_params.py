@@ -8,4 +8,8 @@ __all__ = ["WorkerCreateParams"]
 
 
 class WorkerCreateParams(TypedDict, total=False):
-    body: Required[object]
+    name: Required[str]
+    """Name of the worker"""
+
+    description: str
+    """Description of the worker"""

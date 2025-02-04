@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
 __all__ = ["WorkerUpdateParams"]
 
 
 class WorkerUpdateParams(TypedDict, total=False):
-    body: Required[object]
+    description: str
+    """Description of the worker"""
+
+    name: str
+    """Name of the worker"""

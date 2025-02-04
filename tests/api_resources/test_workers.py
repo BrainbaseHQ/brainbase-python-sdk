@@ -26,7 +26,16 @@ class TestWorkers:
     @parametrize
     def test_method_create(self, client: Brainbase) -> None:
         worker = client.workers.create(
-            body={},
+            name="name",
+        )
+        assert_matches_type(WorkerCreateResponse, worker, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_create_with_all_params(self, client: Brainbase) -> None:
+        worker = client.workers.create(
+            name="name",
+            description="description",
         )
         assert_matches_type(WorkerCreateResponse, worker, path=["response"])
 
@@ -34,7 +43,7 @@ class TestWorkers:
     @parametrize
     def test_raw_response_create(self, client: Brainbase) -> None:
         response = client.workers.with_raw_response.create(
-            body={},
+            name="name",
         )
 
         assert response.is_closed is True
@@ -46,7 +55,7 @@ class TestWorkers:
     @parametrize
     def test_streaming_response_create(self, client: Brainbase) -> None:
         with client.workers.with_streaming_response.create(
-            body={},
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -103,7 +112,16 @@ class TestWorkers:
     def test_method_update(self, client: Brainbase) -> None:
         worker = client.workers.update(
             id="id",
-            body={},
+        )
+        assert_matches_type(WorkerUpdateResponse, worker, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_update_with_all_params(self, client: Brainbase) -> None:
+        worker = client.workers.update(
+            id="id",
+            description="description",
+            name="name",
         )
         assert_matches_type(WorkerUpdateResponse, worker, path=["response"])
 
@@ -112,7 +130,6 @@ class TestWorkers:
     def test_raw_response_update(self, client: Brainbase) -> None:
         response = client.workers.with_raw_response.update(
             id="id",
-            body={},
         )
 
         assert response.is_closed is True
@@ -125,7 +142,6 @@ class TestWorkers:
     def test_streaming_response_update(self, client: Brainbase) -> None:
         with client.workers.with_streaming_response.update(
             id="id",
-            body={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -141,7 +157,6 @@ class TestWorkers:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.workers.with_raw_response.update(
                 id="",
-                body={},
             )
 
     @pytest.mark.skip()
@@ -222,7 +237,16 @@ class TestAsyncWorkers:
     @parametrize
     async def test_method_create(self, async_client: AsyncBrainbase) -> None:
         worker = await async_client.workers.create(
-            body={},
+            name="name",
+        )
+        assert_matches_type(WorkerCreateResponse, worker, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncBrainbase) -> None:
+        worker = await async_client.workers.create(
+            name="name",
+            description="description",
         )
         assert_matches_type(WorkerCreateResponse, worker, path=["response"])
 
@@ -230,7 +254,7 @@ class TestAsyncWorkers:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.with_raw_response.create(
-            body={},
+            name="name",
         )
 
         assert response.is_closed is True
@@ -242,7 +266,7 @@ class TestAsyncWorkers:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.with_streaming_response.create(
-            body={},
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -299,7 +323,16 @@ class TestAsyncWorkers:
     async def test_method_update(self, async_client: AsyncBrainbase) -> None:
         worker = await async_client.workers.update(
             id="id",
-            body={},
+        )
+        assert_matches_type(WorkerUpdateResponse, worker, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncBrainbase) -> None:
+        worker = await async_client.workers.update(
+            id="id",
+            description="description",
+            name="name",
         )
         assert_matches_type(WorkerUpdateResponse, worker, path=["response"])
 
@@ -308,7 +341,6 @@ class TestAsyncWorkers:
     async def test_raw_response_update(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.with_raw_response.update(
             id="id",
-            body={},
         )
 
         assert response.is_closed is True
@@ -321,7 +353,6 @@ class TestAsyncWorkers:
     async def test_streaming_response_update(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.with_streaming_response.update(
             id="id",
-            body={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -337,7 +368,6 @@ class TestAsyncWorkers:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.workers.with_raw_response.update(
                 id="",
-                body={},
             )
 
     @pytest.mark.skip()

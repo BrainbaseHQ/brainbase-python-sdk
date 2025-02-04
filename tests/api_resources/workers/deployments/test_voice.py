@@ -27,7 +27,19 @@ class TestVoice:
     def test_method_create(self, client: Brainbase) -> None:
         voice = client.workers.deployments.voice.create(
             worker_id="workerId",
-            body={},
+            name="name",
+        )
+        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_create_with_all_params(self, client: Brainbase) -> None:
+        voice = client.workers.deployments.voice.create(
+            worker_id="workerId",
+            name="name",
+            phone_number="phoneNumber",
+            voice_id="voiceId",
+            voice_provider="voiceProvider",
         )
         assert_matches_type(VoiceCreateResponse, voice, path=["response"])
 
@@ -36,7 +48,7 @@ class TestVoice:
     def test_raw_response_create(self, client: Brainbase) -> None:
         response = client.workers.deployments.voice.with_raw_response.create(
             worker_id="workerId",
-            body={},
+            name="name",
         )
 
         assert response.is_closed is True
@@ -49,7 +61,7 @@ class TestVoice:
     def test_streaming_response_create(self, client: Brainbase) -> None:
         with client.workers.deployments.voice.with_streaming_response.create(
             worker_id="workerId",
-            body={},
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -65,7 +77,7 @@ class TestVoice:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
             client.workers.deployments.voice.with_raw_response.create(
                 worker_id="",
-                body={},
+                name="name",
             )
 
     @pytest.mark.skip()
@@ -126,7 +138,20 @@ class TestVoice:
         voice = client.workers.deployments.voice.update(
             deployment_id="deploymentId",
             worker_id="workerId",
-            body={},
+            name="name",
+        )
+        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_update_with_all_params(self, client: Brainbase) -> None:
+        voice = client.workers.deployments.voice.update(
+            deployment_id="deploymentId",
+            worker_id="workerId",
+            name="name",
+            phone_number="phoneNumber",
+            voice_id="voiceId",
+            voice_provider="voiceProvider",
         )
         assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
 
@@ -136,7 +161,7 @@ class TestVoice:
         response = client.workers.deployments.voice.with_raw_response.update(
             deployment_id="deploymentId",
             worker_id="workerId",
-            body={},
+            name="name",
         )
 
         assert response.is_closed is True
@@ -150,7 +175,7 @@ class TestVoice:
         with client.workers.deployments.voice.with_streaming_response.update(
             deployment_id="deploymentId",
             worker_id="workerId",
-            body={},
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -167,14 +192,14 @@ class TestVoice:
             client.workers.deployments.voice.with_raw_response.update(
                 deployment_id="deploymentId",
                 worker_id="",
-                body={},
+                name="name",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `deployment_id` but received ''"):
             client.workers.deployments.voice.with_raw_response.update(
                 deployment_id="",
                 worker_id="workerId",
-                body={},
+                name="name",
             )
 
     @pytest.mark.skip()
@@ -280,7 +305,19 @@ class TestAsyncVoice:
     async def test_method_create(self, async_client: AsyncBrainbase) -> None:
         voice = await async_client.workers.deployments.voice.create(
             worker_id="workerId",
-            body={},
+            name="name",
+        )
+        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncBrainbase) -> None:
+        voice = await async_client.workers.deployments.voice.create(
+            worker_id="workerId",
+            name="name",
+            phone_number="phoneNumber",
+            voice_id="voiceId",
+            voice_provider="voiceProvider",
         )
         assert_matches_type(VoiceCreateResponse, voice, path=["response"])
 
@@ -289,7 +326,7 @@ class TestAsyncVoice:
     async def test_raw_response_create(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.deployments.voice.with_raw_response.create(
             worker_id="workerId",
-            body={},
+            name="name",
         )
 
         assert response.is_closed is True
@@ -302,7 +339,7 @@ class TestAsyncVoice:
     async def test_streaming_response_create(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.deployments.voice.with_streaming_response.create(
             worker_id="workerId",
-            body={},
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -318,7 +355,7 @@ class TestAsyncVoice:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
             await async_client.workers.deployments.voice.with_raw_response.create(
                 worker_id="",
-                body={},
+                name="name",
             )
 
     @pytest.mark.skip()
@@ -379,7 +416,20 @@ class TestAsyncVoice:
         voice = await async_client.workers.deployments.voice.update(
             deployment_id="deploymentId",
             worker_id="workerId",
-            body={},
+            name="name",
+        )
+        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncBrainbase) -> None:
+        voice = await async_client.workers.deployments.voice.update(
+            deployment_id="deploymentId",
+            worker_id="workerId",
+            name="name",
+            phone_number="phoneNumber",
+            voice_id="voiceId",
+            voice_provider="voiceProvider",
         )
         assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
 
@@ -389,7 +439,7 @@ class TestAsyncVoice:
         response = await async_client.workers.deployments.voice.with_raw_response.update(
             deployment_id="deploymentId",
             worker_id="workerId",
-            body={},
+            name="name",
         )
 
         assert response.is_closed is True
@@ -403,7 +453,7 @@ class TestAsyncVoice:
         async with async_client.workers.deployments.voice.with_streaming_response.update(
             deployment_id="deploymentId",
             worker_id="workerId",
-            body={},
+            name="name",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -420,14 +470,14 @@ class TestAsyncVoice:
             await async_client.workers.deployments.voice.with_raw_response.update(
                 deployment_id="deploymentId",
                 worker_id="",
-                body={},
+                name="name",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `deployment_id` but received ''"):
             await async_client.workers.deployments.voice.with_raw_response.update(
                 deployment_id="",
                 worker_id="workerId",
-                body={},
+                name="name",
             )
 
     @pytest.mark.skip()
