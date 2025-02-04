@@ -54,7 +54,7 @@ class WorkersResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/brainbase-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/BrainbaseHQ/brainbase-python-sdk#accessing-raw-response-data-eg-headers
         """
         return WorkersResourceWithRawResponse(self)
 
@@ -63,16 +63,15 @@ class WorkersResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/brainbase-python#with_streaming_response
+        For more information, see https://www.github.com/BrainbaseHQ/brainbase-python-sdk#with_streaming_response
         """
         return WorkersResourceWithStreamingResponse(self)
 
     def create(
         self,
-        id: str,
         *,
+        name: str,
         description: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
         status: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -82,7 +81,7 @@ class WorkersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Update a worker
+        Create a new worker
 
         Args:
           extra_headers: Send extra headers
@@ -93,15 +92,13 @@ class WorkersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/api/workers/{id}",
+            "/api/workers",
             body=maybe_transform(
                 {
-                    "description": description,
                     "name": name,
+                    "description": description,
                     "status": status,
                 },
                 worker_create_params.WorkerCreateParams,
@@ -216,7 +213,7 @@ class AsyncWorkersResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/brainbase-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/BrainbaseHQ/brainbase-python-sdk#accessing-raw-response-data-eg-headers
         """
         return AsyncWorkersResourceWithRawResponse(self)
 
@@ -225,16 +222,15 @@ class AsyncWorkersResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/brainbase-python#with_streaming_response
+        For more information, see https://www.github.com/BrainbaseHQ/brainbase-python-sdk#with_streaming_response
         """
         return AsyncWorkersResourceWithStreamingResponse(self)
 
     async def create(
         self,
-        id: str,
         *,
+        name: str,
         description: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
         status: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -244,7 +240,7 @@ class AsyncWorkersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Update a worker
+        Create a new worker
 
         Args:
           extra_headers: Send extra headers
@@ -255,15 +251,13 @@ class AsyncWorkersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not id:
-            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/api/workers/{id}",
+            "/api/workers",
             body=await async_maybe_transform(
                 {
-                    "description": description,
                     "name": name,
+                    "description": description,
                     "status": status,
                 },
                 worker_create_params.WorkerCreateParams,
