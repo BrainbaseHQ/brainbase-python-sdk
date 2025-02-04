@@ -9,7 +9,7 @@ __all__ = ["WorkerUpdateParams"]
 
 class WorkerUpdateParams(TypedDict, total=False):
     description: str
+    """Description of the worker"""
 
     name: str
-
-    status: str
+    """Name of the worker"""

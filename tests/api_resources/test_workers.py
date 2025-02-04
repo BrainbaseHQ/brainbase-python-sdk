@@ -8,6 +8,13 @@ from typing import Any, cast
 import pytest
 
 from brainbase import Brainbase, AsyncBrainbase
+from tests.utils import assert_matches_type
+from brainbase.types import (
+    WorkerListResponse,
+    WorkerCreateResponse,
+    WorkerUpdateResponse,
+    WorkerRetrieveResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -21,7 +28,7 @@ class TestWorkers:
         worker = client.workers.create(
             name="name",
         )
-        assert worker is None
+        assert_matches_type(WorkerCreateResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -29,9 +36,8 @@ class TestWorkers:
         worker = client.workers.create(
             name="name",
             description="description",
-            status="status",
         )
-        assert worker is None
+        assert_matches_type(WorkerCreateResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -43,7 +49,7 @@ class TestWorkers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         worker = response.parse()
-        assert worker is None
+        assert_matches_type(WorkerCreateResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -55,7 +61,7 @@ class TestWorkers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             worker = response.parse()
-            assert worker is None
+            assert_matches_type(WorkerCreateResponse, worker, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -65,7 +71,7 @@ class TestWorkers:
         worker = client.workers.retrieve(
             "id",
         )
-        assert worker is None
+        assert_matches_type(WorkerRetrieveResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -77,7 +83,7 @@ class TestWorkers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         worker = response.parse()
-        assert worker is None
+        assert_matches_type(WorkerRetrieveResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -89,7 +95,7 @@ class TestWorkers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             worker = response.parse()
-            assert worker is None
+            assert_matches_type(WorkerRetrieveResponse, worker, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -107,7 +113,7 @@ class TestWorkers:
         worker = client.workers.update(
             id="id",
         )
-        assert worker is None
+        assert_matches_type(WorkerUpdateResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -116,9 +122,8 @@ class TestWorkers:
             id="id",
             description="description",
             name="name",
-            status="status",
         )
-        assert worker is None
+        assert_matches_type(WorkerUpdateResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -130,7 +135,7 @@ class TestWorkers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         worker = response.parse()
-        assert worker is None
+        assert_matches_type(WorkerUpdateResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -142,7 +147,7 @@ class TestWorkers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             worker = response.parse()
-            assert worker is None
+            assert_matches_type(WorkerUpdateResponse, worker, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -158,7 +163,7 @@ class TestWorkers:
     @parametrize
     def test_method_list(self, client: Brainbase) -> None:
         worker = client.workers.list()
-        assert worker is None
+        assert_matches_type(WorkerListResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -168,7 +173,7 @@ class TestWorkers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         worker = response.parse()
-        assert worker is None
+        assert_matches_type(WorkerListResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -178,7 +183,7 @@ class TestWorkers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             worker = response.parse()
-            assert worker is None
+            assert_matches_type(WorkerListResponse, worker, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -234,7 +239,7 @@ class TestAsyncWorkers:
         worker = await async_client.workers.create(
             name="name",
         )
-        assert worker is None
+        assert_matches_type(WorkerCreateResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -242,9 +247,8 @@ class TestAsyncWorkers:
         worker = await async_client.workers.create(
             name="name",
             description="description",
-            status="status",
         )
-        assert worker is None
+        assert_matches_type(WorkerCreateResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -256,7 +260,7 @@ class TestAsyncWorkers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         worker = await response.parse()
-        assert worker is None
+        assert_matches_type(WorkerCreateResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -268,7 +272,7 @@ class TestAsyncWorkers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             worker = await response.parse()
-            assert worker is None
+            assert_matches_type(WorkerCreateResponse, worker, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -278,7 +282,7 @@ class TestAsyncWorkers:
         worker = await async_client.workers.retrieve(
             "id",
         )
-        assert worker is None
+        assert_matches_type(WorkerRetrieveResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -290,7 +294,7 @@ class TestAsyncWorkers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         worker = await response.parse()
-        assert worker is None
+        assert_matches_type(WorkerRetrieveResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -302,7 +306,7 @@ class TestAsyncWorkers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             worker = await response.parse()
-            assert worker is None
+            assert_matches_type(WorkerRetrieveResponse, worker, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -320,7 +324,7 @@ class TestAsyncWorkers:
         worker = await async_client.workers.update(
             id="id",
         )
-        assert worker is None
+        assert_matches_type(WorkerUpdateResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -329,9 +333,8 @@ class TestAsyncWorkers:
             id="id",
             description="description",
             name="name",
-            status="status",
         )
-        assert worker is None
+        assert_matches_type(WorkerUpdateResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -343,7 +346,7 @@ class TestAsyncWorkers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         worker = await response.parse()
-        assert worker is None
+        assert_matches_type(WorkerUpdateResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -355,7 +358,7 @@ class TestAsyncWorkers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             worker = await response.parse()
-            assert worker is None
+            assert_matches_type(WorkerUpdateResponse, worker, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -371,7 +374,7 @@ class TestAsyncWorkers:
     @parametrize
     async def test_method_list(self, async_client: AsyncBrainbase) -> None:
         worker = await async_client.workers.list()
-        assert worker is None
+        assert_matches_type(WorkerListResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -381,7 +384,7 @@ class TestAsyncWorkers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         worker = await response.parse()
-        assert worker is None
+        assert_matches_type(WorkerListResponse, worker, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -391,7 +394,7 @@ class TestAsyncWorkers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             worker = await response.parse()
-            assert worker is None
+            assert_matches_type(WorkerListResponse, worker, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

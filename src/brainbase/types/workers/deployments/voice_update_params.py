@@ -12,14 +12,14 @@ __all__ = ["VoiceUpdateParams"]
 class VoiceUpdateParams(TypedDict, total=False):
     worker_id: Required[Annotated[str, PropertyInfo(alias="workerId")]]
 
-    config: object
-
-    flow_id: Annotated[str, PropertyInfo(alias="flowId")]
-
-    name: str
+    name: Required[str]
+    """Name of the voice deployment"""
 
     phone_number: Annotated[str, PropertyInfo(alias="phoneNumber")]
+    """Phone number for the voice deployment"""
 
     voice_id: Annotated[str, PropertyInfo(alias="voiceId")]
+    """Voice ID for the deployment"""
 
     voice_provider: Annotated[str, PropertyInfo(alias="voiceProvider")]
+    """Voice provider service"""

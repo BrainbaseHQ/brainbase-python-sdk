@@ -9,7 +9,7 @@ __all__ = ["WorkerCreateParams"]
 
 class WorkerCreateParams(TypedDict, total=False):
     name: Required[str]
+    """Name of the worker"""
 
     description: str
-
-    status: str
+    """Description of the worker"""

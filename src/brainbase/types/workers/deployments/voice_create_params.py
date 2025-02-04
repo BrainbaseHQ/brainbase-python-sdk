@@ -10,14 +10,14 @@ __all__ = ["VoiceCreateParams"]
 
 
 class VoiceCreateParams(TypedDict, total=False):
-    flow_id: Required[Annotated[str, PropertyInfo(alias="flowId")]]
-
     name: Required[str]
-
-    config: object
+    """Name of the voice deployment"""
 
     phone_number: Annotated[str, PropertyInfo(alias="phoneNumber")]
+    """Phone number for the voice deployment"""
 
     voice_id: Annotated[str, PropertyInfo(alias="voiceId")]
+    """Voice ID for the deployment"""
 
     voice_provider: Annotated[str, PropertyInfo(alias="voiceProvider")]
+    """Voice provider service"""

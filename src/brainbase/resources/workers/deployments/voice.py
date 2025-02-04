@@ -19,6 +19,10 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.workers.deployments import voice_create_params, voice_update_params
+from ....types.workers.deployments.voice_list_response import VoiceListResponse
+from ....types.workers.deployments.voice_create_response import VoiceCreateResponse
+from ....types.workers.deployments.voice_update_response import VoiceUpdateResponse
+from ....types.workers.deployments.voice_retrieve_response import VoiceRetrieveResponse
 
 __all__ = ["VoiceResource", "AsyncVoiceResource"]
 
@@ -47,9 +51,7 @@ class VoiceResource(SyncAPIResource):
         self,
         worker_id: str,
         *,
-        flow_id: str,
         name: str,
-        config: object | NotGiven = NOT_GIVEN,
         phone_number: str | NotGiven = NOT_GIVEN,
         voice_id: str | NotGiven = NOT_GIVEN,
         voice_provider: str | NotGiven = NOT_GIVEN,
@@ -59,11 +61,19 @@ class VoiceResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> VoiceCreateResponse:
         """
         Create a new voice deployment
 
         Args:
+          name: Name of the voice deployment
+
+          phone_number: Phone number for the voice deployment
+
+          voice_id: Voice ID for the deployment
+
+          voice_provider: Voice provider service
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -74,14 +84,11 @@ class VoiceResource(SyncAPIResource):
         """
         if not worker_id:
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             f"/api/workers/{worker_id}/deployments/voice",
             body=maybe_transform(
                 {
-                    "flow_id": flow_id,
                     "name": name,
-                    "config": config,
                     "phone_number": phone_number,
                     "voice_id": voice_id,
                     "voice_provider": voice_provider,
@@ -91,7 +98,7 @@ class VoiceResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=VoiceCreateResponse,
         )
 
     def retrieve(
@@ -105,7 +112,7 @@ class VoiceResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> VoiceRetrieveResponse:
         """
         Get a single voice deployment
 
@@ -122,13 +129,12 @@ class VoiceResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         if not deployment_id:
             raise ValueError(f"Expected a non-empty value for `deployment_id` but received {deployment_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._get(
             f"/api/workers/{worker_id}/deployments/voice/{deployment_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=VoiceRetrieveResponse,
         )
 
     def update(
@@ -136,9 +142,7 @@ class VoiceResource(SyncAPIResource):
         deployment_id: str,
         *,
         worker_id: str,
-        config: object | NotGiven = NOT_GIVEN,
-        flow_id: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
+        name: str,
         phone_number: str | NotGiven = NOT_GIVEN,
         voice_id: str | NotGiven = NOT_GIVEN,
         voice_provider: str | NotGiven = NOT_GIVEN,
@@ -148,11 +152,19 @@ class VoiceResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> VoiceUpdateResponse:
         """
         Update a voice deployment
 
         Args:
+          name: Name of the voice deployment
+
+          phone_number: Phone number for the voice deployment
+
+          voice_id: Voice ID for the deployment
+
+          voice_provider: Voice provider service
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -165,13 +177,10 @@ class VoiceResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         if not deployment_id:
             raise ValueError(f"Expected a non-empty value for `deployment_id` but received {deployment_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._put(
             f"/api/workers/{worker_id}/deployments/voice/{deployment_id}",
             body=maybe_transform(
                 {
-                    "config": config,
-                    "flow_id": flow_id,
                     "name": name,
                     "phone_number": phone_number,
                     "voice_id": voice_id,
@@ -182,7 +191,7 @@ class VoiceResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=VoiceUpdateResponse,
         )
 
     def list(
@@ -195,7 +204,7 @@ class VoiceResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> VoiceListResponse:
         """
         Get all voice deployments for a worker
 
@@ -210,13 +219,12 @@ class VoiceResource(SyncAPIResource):
         """
         if not worker_id:
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._get(
             f"/api/workers/{worker_id}/deployments/voice",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=VoiceListResponse,
         )
 
     def delete(
@@ -281,9 +289,7 @@ class AsyncVoiceResource(AsyncAPIResource):
         self,
         worker_id: str,
         *,
-        flow_id: str,
         name: str,
-        config: object | NotGiven = NOT_GIVEN,
         phone_number: str | NotGiven = NOT_GIVEN,
         voice_id: str | NotGiven = NOT_GIVEN,
         voice_provider: str | NotGiven = NOT_GIVEN,
@@ -293,11 +299,19 @@ class AsyncVoiceResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> VoiceCreateResponse:
         """
         Create a new voice deployment
 
         Args:
+          name: Name of the voice deployment
+
+          phone_number: Phone number for the voice deployment
+
+          voice_id: Voice ID for the deployment
+
+          voice_provider: Voice provider service
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -308,14 +322,11 @@ class AsyncVoiceResource(AsyncAPIResource):
         """
         if not worker_id:
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             f"/api/workers/{worker_id}/deployments/voice",
             body=await async_maybe_transform(
                 {
-                    "flow_id": flow_id,
                     "name": name,
-                    "config": config,
                     "phone_number": phone_number,
                     "voice_id": voice_id,
                     "voice_provider": voice_provider,
@@ -325,7 +336,7 @@ class AsyncVoiceResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=VoiceCreateResponse,
         )
 
     async def retrieve(
@@ -339,7 +350,7 @@ class AsyncVoiceResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> VoiceRetrieveResponse:
         """
         Get a single voice deployment
 
@@ -356,13 +367,12 @@ class AsyncVoiceResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         if not deployment_id:
             raise ValueError(f"Expected a non-empty value for `deployment_id` but received {deployment_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._get(
             f"/api/workers/{worker_id}/deployments/voice/{deployment_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=VoiceRetrieveResponse,
         )
 
     async def update(
@@ -370,9 +380,7 @@ class AsyncVoiceResource(AsyncAPIResource):
         deployment_id: str,
         *,
         worker_id: str,
-        config: object | NotGiven = NOT_GIVEN,
-        flow_id: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
+        name: str,
         phone_number: str | NotGiven = NOT_GIVEN,
         voice_id: str | NotGiven = NOT_GIVEN,
         voice_provider: str | NotGiven = NOT_GIVEN,
@@ -382,11 +390,19 @@ class AsyncVoiceResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> VoiceUpdateResponse:
         """
         Update a voice deployment
 
         Args:
+          name: Name of the voice deployment
+
+          phone_number: Phone number for the voice deployment
+
+          voice_id: Voice ID for the deployment
+
+          voice_provider: Voice provider service
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -399,13 +415,10 @@ class AsyncVoiceResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         if not deployment_id:
             raise ValueError(f"Expected a non-empty value for `deployment_id` but received {deployment_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._put(
             f"/api/workers/{worker_id}/deployments/voice/{deployment_id}",
             body=await async_maybe_transform(
                 {
-                    "config": config,
-                    "flow_id": flow_id,
                     "name": name,
                     "phone_number": phone_number,
                     "voice_id": voice_id,
@@ -416,7 +429,7 @@ class AsyncVoiceResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=VoiceUpdateResponse,
         )
 
     async def list(
@@ -429,7 +442,7 @@ class AsyncVoiceResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> None:
+    ) -> VoiceListResponse:
         """
         Get all voice deployments for a worker
 
@@ -444,13 +457,12 @@ class AsyncVoiceResource(AsyncAPIResource):
         """
         if not worker_id:
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._get(
             f"/api/workers/{worker_id}/deployments/voice",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=VoiceListResponse,
         )
 
     async def delete(
