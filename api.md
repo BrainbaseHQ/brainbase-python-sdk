@@ -2,10 +2,11 @@
 
 Methods:
 
-- <code title="post /api/workers/{id}">client.workers.<a href="./src/brainbase/resources/workers/workers.py">create</a>(id, \*\*<a href="src/brainbase/types/worker_create_params.py">params</a>) -> None</code>
+- <code title="post /api/workers">client.workers.<a href="./src/brainbase/resources/workers/workers.py">create</a>(\*\*<a href="src/brainbase/types/worker_create_params.py">params</a>) -> None</code>
 - <code title="get /api/workers/{id}">client.workers.<a href="./src/brainbase/resources/workers/workers.py">retrieve</a>(id) -> None</code>
 - <code title="get /api/workers">client.workers.<a href="./src/brainbase/resources/workers/workers.py">list</a>() -> None</code>
-- <code title="delete /api/workers/{id}">client.workers.<a href="./src/brainbase/resources/workers/workers.py">delete</a>(id) -> None</code>
+- <code title="post /api/workers/{id}">client.workers.<a href="./src/brainbase/resources/workers/workers.py">create_id</a>(id, \*\*<a href="src/brainbase/types/worker_create_id_params.py">params</a>) -> None</code>
+- <code title="delete /api/workers/{id}">client.workers.<a href="./src/brainbase/resources/workers/workers.py">delete_id</a>(id) -> None</code>
 
 ## Deployments
 
