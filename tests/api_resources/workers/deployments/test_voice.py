@@ -10,10 +10,8 @@ import pytest
 from brainbase import Brainbase, AsyncBrainbase
 from tests.utils import assert_matches_type
 from brainbase.types.workers.deployments import (
+    VoiceDeployment,
     VoiceListResponse,
-    VoiceCreateResponse,
-    VoiceUpdateResponse,
-    VoiceRetrieveResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -29,7 +27,7 @@ class TestVoice:
             worker_id="workerId",
             name="name",
         )
-        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -41,7 +39,7 @@ class TestVoice:
             voice_id="voiceId",
             voice_provider="voiceProvider",
         )
-        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -54,7 +52,7 @@ class TestVoice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         voice = response.parse()
-        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -67,7 +65,7 @@ class TestVoice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             voice = response.parse()
-            assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+            assert_matches_type(VoiceDeployment, voice, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -87,7 +85,7 @@ class TestVoice:
             deployment_id="deploymentId",
             worker_id="workerId",
         )
-        assert_matches_type(VoiceRetrieveResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -100,7 +98,7 @@ class TestVoice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         voice = response.parse()
-        assert_matches_type(VoiceRetrieveResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -113,7 +111,7 @@ class TestVoice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             voice = response.parse()
-            assert_matches_type(VoiceRetrieveResponse, voice, path=["response"])
+            assert_matches_type(VoiceDeployment, voice, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -140,7 +138,7 @@ class TestVoice:
             worker_id="workerId",
             name="name",
         )
-        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -153,7 +151,7 @@ class TestVoice:
             voice_id="voiceId",
             voice_provider="voiceProvider",
         )
-        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -167,7 +165,7 @@ class TestVoice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         voice = response.parse()
-        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -181,7 +179,7 @@ class TestVoice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             voice = response.parse()
-            assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+            assert_matches_type(VoiceDeployment, voice, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -307,7 +305,7 @@ class TestAsyncVoice:
             worker_id="workerId",
             name="name",
         )
-        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -319,7 +317,7 @@ class TestAsyncVoice:
             voice_id="voiceId",
             voice_provider="voiceProvider",
         )
-        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -332,7 +330,7 @@ class TestAsyncVoice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         voice = await response.parse()
-        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -345,7 +343,7 @@ class TestAsyncVoice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             voice = await response.parse()
-            assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+            assert_matches_type(VoiceDeployment, voice, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -365,7 +363,7 @@ class TestAsyncVoice:
             deployment_id="deploymentId",
             worker_id="workerId",
         )
-        assert_matches_type(VoiceRetrieveResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -378,7 +376,7 @@ class TestAsyncVoice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         voice = await response.parse()
-        assert_matches_type(VoiceRetrieveResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -391,7 +389,7 @@ class TestAsyncVoice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             voice = await response.parse()
-            assert_matches_type(VoiceRetrieveResponse, voice, path=["response"])
+            assert_matches_type(VoiceDeployment, voice, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -418,7 +416,7 @@ class TestAsyncVoice:
             worker_id="workerId",
             name="name",
         )
-        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -431,7 +429,7 @@ class TestAsyncVoice:
             voice_id="voiceId",
             voice_provider="voiceProvider",
         )
-        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -445,7 +443,7 @@ class TestAsyncVoice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         voice = await response.parse()
-        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -459,7 +457,7 @@ class TestAsyncVoice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             voice = await response.parse()
-            assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+            assert_matches_type(VoiceDeployment, voice, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
