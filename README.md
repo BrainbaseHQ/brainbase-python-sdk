@@ -28,16 +28,16 @@ import os
 from brainbase import Brainbase
 
 client = Brainbase(
-    bearer_token=os.environ.get("BEARER_TOKEN"),  # This is the default and can be omitted
+    api_key=os.environ.get("API_KEY"),  # This is the default and can be omitted
 )
 
 client.workers.list()
 ```
 
-While you can provide a `bearer_token` keyword argument,
+While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `BEARER_TOKEN="My Bearer Token"` to your `.env` file
-so that your Bearer Token is not stored in source control.
+to add `API_KEY="My API Key"` to your `.env` file
+so that your API Key is not stored in source control.
 
 ## Async usage
 
@@ -49,7 +49,7 @@ import asyncio
 from brainbase import AsyncBrainbase
 
 client = AsyncBrainbase(
-    bearer_token=os.environ.get("BEARER_TOKEN"),  # This is the default and can be omitted
+    api_key=os.environ.get("API_KEY"),  # This is the default and can be omitted
 )
 
 
