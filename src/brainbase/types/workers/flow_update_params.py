@@ -12,8 +12,4 @@ __all__ = ["FlowUpdateParams"]
 class FlowUpdateParams(TypedDict, total=False):
     worker_id: Required[Annotated[str, PropertyInfo(alias="workerId")]]
 
-    code: str
-
-    label: str
-
-    name: str
+    body: Required[object]
