@@ -27,7 +27,7 @@ The full API of this library can be found in [api.md](api.md).
 from brainbase import Brainbase
 
 client = Brainbase(
-    bearer_token="My Bearer Token",
+    api_key="My API Key",
 )
 
 client.workers.list()
@@ -42,7 +42,7 @@ import asyncio
 from brainbase import AsyncBrainbase
 
 client = AsyncBrainbase(
-    bearer_token="My Bearer Token",
+    api_key="My API Key",
 )
 
 
@@ -78,7 +78,7 @@ import brainbase
 from brainbase import Brainbase
 
 client = Brainbase(
-    bearer_token="My Bearer Token",
+    api_key="My API Key",
 )
 
 try:
@@ -122,7 +122,7 @@ from brainbase import Brainbase
 client = Brainbase(
     # default is 2
     max_retries=0,
-    bearer_token="My Bearer Token",
+    api_key="My API Key",
 )
 
 # Or, configure per-request:
@@ -141,13 +141,13 @@ from brainbase import Brainbase
 client = Brainbase(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
-    bearer_token="My Bearer Token",
+    api_key="My API Key",
 )
 
 # More granular control:
 client = Brainbase(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
-    bearer_token="My Bearer Token",
+    api_key="My API Key",
 )
 
 # Override per-request:
@@ -192,7 +192,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from brainbase import Brainbase
 
 client = Brainbase(
-    bearer_token="My Bearer Token",
+    api_key="My API Key",
 )
 response = client.workers.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
@@ -274,7 +274,7 @@ client = Brainbase(
         proxy="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
-    bearer_token="My Bearer Token",
+    api_key="My API Key",
 )
 ```
 
@@ -292,7 +292,7 @@ By default the library closes underlying HTTP connections whenever the client is
 from brainbase import Brainbase
 
 with Brainbase(
-    bearer_token="My Bearer Token",
+    api_key="My API Key",
 ) as client:
   # make requests here
   ...
