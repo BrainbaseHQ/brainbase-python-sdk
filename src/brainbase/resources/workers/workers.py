@@ -12,7 +12,7 @@ from .flows import (
     FlowsResourceWithStreamingResponse,
     AsyncFlowsResourceWithStreamingResponse,
 )
-from ...types import worker_create_params
+from ...types import worker_create_params, worker_update_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
 from ..._utils import (
     maybe_transform,
@@ -54,7 +54,7 @@ class WorkersResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/BrainbaseHQ/brainbase-python-sdk#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/brainbase-python#accessing-raw-response-data-eg-headers
         """
         return WorkersResourceWithRawResponse(self)
 
@@ -63,15 +63,16 @@ class WorkersResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/BrainbaseHQ/brainbase-python-sdk#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/brainbase-python#with_streaming_response
         """
         return WorkersResourceWithStreamingResponse(self)
 
     def create(
         self,
+        id: str,
         *,
-        name: str,
         description: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         status: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -81,7 +82,7 @@ class WorkersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Create a new worker
+        Update a worker
 
         Args:
           extra_headers: Send extra headers
@@ -92,13 +93,15 @@ class WorkersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            "/api/workers",
+            f"/api/workers/{id}",
             body=maybe_transform(
                 {
-                    "name": name,
                     "description": description,
+                    "name": name,
                     "status": status,
                 },
                 worker_create_params.WorkerCreateParams,
@@ -137,6 +140,51 @@ class WorkersResource(SyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._get(
             f"/api/workers/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def update(
+        self,
+        id: str,
+        *,
+        description: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        status: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Update a worker
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            f"/api/workers/{id}",
+            body=maybe_transform(
+                {
+                    "description": description,
+                    "name": name,
+                    "status": status,
+                },
+                worker_update_params.WorkerUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -213,7 +261,7 @@ class AsyncWorkersResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/BrainbaseHQ/brainbase-python-sdk#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/brainbase-python#accessing-raw-response-data-eg-headers
         """
         return AsyncWorkersResourceWithRawResponse(self)
 
@@ -222,15 +270,16 @@ class AsyncWorkersResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/BrainbaseHQ/brainbase-python-sdk#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/brainbase-python#with_streaming_response
         """
         return AsyncWorkersResourceWithStreamingResponse(self)
 
     async def create(
         self,
+        id: str,
         *,
-        name: str,
         description: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         status: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -240,7 +289,7 @@ class AsyncWorkersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> None:
         """
-        Create a new worker
+        Update a worker
 
         Args:
           extra_headers: Send extra headers
@@ -251,13 +300,15 @@ class AsyncWorkersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            "/api/workers",
+            f"/api/workers/{id}",
             body=await async_maybe_transform(
                 {
-                    "name": name,
                     "description": description,
+                    "name": name,
                     "status": status,
                 },
                 worker_create_params.WorkerCreateParams,
@@ -296,6 +347,51 @@ class AsyncWorkersResource(AsyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._get(
             f"/api/workers/{id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def update(
+        self,
+        id: str,
+        *,
+        description: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        status: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> None:
+        """
+        Update a worker
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            f"/api/workers/{id}",
+            body=await async_maybe_transform(
+                {
+                    "description": description,
+                    "name": name,
+                    "status": status,
+                },
+                worker_update_params.WorkerUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -367,6 +463,9 @@ class WorkersResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             workers.retrieve,
         )
+        self.update = to_raw_response_wrapper(
+            workers.update,
+        )
         self.list = to_raw_response_wrapper(
             workers.list,
         )
@@ -392,6 +491,9 @@ class AsyncWorkersResourceWithRawResponse:
         )
         self.retrieve = async_to_raw_response_wrapper(
             workers.retrieve,
+        )
+        self.update = async_to_raw_response_wrapper(
+            workers.update,
         )
         self.list = async_to_raw_response_wrapper(
             workers.list,
@@ -419,6 +521,9 @@ class WorkersResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             workers.retrieve,
         )
+        self.update = to_streamed_response_wrapper(
+            workers.update,
+        )
         self.list = to_streamed_response_wrapper(
             workers.list,
         )
@@ -444,6 +549,9 @@ class AsyncWorkersResourceWithStreamingResponse:
         )
         self.retrieve = async_to_streamed_response_wrapper(
             workers.retrieve,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            workers.update,
         )
         self.list = async_to_streamed_response_wrapper(
             workers.list,
