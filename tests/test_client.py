@@ -25,7 +25,7 @@ from brainbase import Brainbase, AsyncBrainbase, APIResponseValidationError
 from brainbase._types import Omit
 from brainbase._models import BaseModel, FinalRequestOptions
 from brainbase._constants import RAW_RESPONSE_HEADER
-from brainbase._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
+from brainbase._exceptions import APIStatusError, BrainbaseError, APITimeoutError, APIResponseValidationError
 from brainbase._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
@@ -333,6 +333,16 @@ class TestBrainbase:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
+
+    def test_validate_headers(self) -> None:
+        client = Brainbase(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("x-api-key") == api_key
+
+        with pytest.raises(BrainbaseError):
+            with update_env(**{"BRAINBASE_API_KEY": Omit()}):
+                client2 = Brainbase(base_url=base_url, api_key=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = Brainbase(
@@ -1079,6 +1089,16 @@ class TestAsyncBrainbase:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
+
+    def test_validate_headers(self) -> None:
+        client = AsyncBrainbase(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("x-api-key") == api_key
+
+        with pytest.raises(BrainbaseError):
+            with update_env(**{"BRAINBASE_API_KEY": Omit()}):
+                client2 = AsyncBrainbase(base_url=base_url, api_key=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = AsyncBrainbase(
