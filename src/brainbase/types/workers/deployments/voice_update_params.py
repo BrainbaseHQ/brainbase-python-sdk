@@ -12,4 +12,14 @@ __all__ = ["VoiceUpdateParams"]
 class VoiceUpdateParams(TypedDict, total=False):
     worker_id: Required[Annotated[str, PropertyInfo(alias="workerId")]]
 
-    body: Required[object]
+    name: Required[str]
+    """Name of the voice deployment"""
+
+    phone_number: Annotated[str, PropertyInfo(alias="phoneNumber")]
+    """Phone number for the voice deployment"""
+
+    voice_id: Annotated[str, PropertyInfo(alias="voiceId")]
+    """Voice ID for the deployment"""
+
+    voice_provider: Annotated[str, PropertyInfo(alias="voiceProvider")]
+    """Voice provider service"""

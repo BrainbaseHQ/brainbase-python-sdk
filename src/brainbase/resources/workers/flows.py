@@ -51,7 +51,9 @@ class FlowsResource(SyncAPIResource):
         self,
         worker_id: str,
         *,
-        body: object,
+        code: str,
+        name: str,
+        label: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -63,6 +65,12 @@ class FlowsResource(SyncAPIResource):
         Create a new flow
 
         Args:
+          code: Flow code
+
+          name: Name of the flow
+
+          label: Optional label for the flow
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -75,7 +83,14 @@ class FlowsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         return self._post(
             f"/api/workers/{worker_id}/flows",
-            body=maybe_transform(body, flow_create_params.FlowCreateParams),
+            body=maybe_transform(
+                {
+                    "code": code,
+                    "name": name,
+                    "label": label,
+                },
+                flow_create_params.FlowCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -123,7 +138,9 @@ class FlowsResource(SyncAPIResource):
         flow_id: str,
         *,
         worker_id: str,
-        body: object,
+        code: str | NotGiven = NOT_GIVEN,
+        label: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -135,6 +152,12 @@ class FlowsResource(SyncAPIResource):
         Update a flow
 
         Args:
+          code: Flow code
+
+          label: Optional label for the flow
+
+          name: Name of the flow
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -149,7 +172,14 @@ class FlowsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         return self._put(
             f"/api/workers/{worker_id}/flows/{flow_id}",
-            body=maybe_transform(body, flow_update_params.FlowUpdateParams),
+            body=maybe_transform(
+                {
+                    "code": code,
+                    "label": label,
+                    "name": name,
+                },
+                flow_update_params.FlowUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -251,7 +281,9 @@ class AsyncFlowsResource(AsyncAPIResource):
         self,
         worker_id: str,
         *,
-        body: object,
+        code: str,
+        name: str,
+        label: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -263,6 +295,12 @@ class AsyncFlowsResource(AsyncAPIResource):
         Create a new flow
 
         Args:
+          code: Flow code
+
+          name: Name of the flow
+
+          label: Optional label for the flow
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -275,7 +313,14 @@ class AsyncFlowsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         return await self._post(
             f"/api/workers/{worker_id}/flows",
-            body=await async_maybe_transform(body, flow_create_params.FlowCreateParams),
+            body=await async_maybe_transform(
+                {
+                    "code": code,
+                    "name": name,
+                    "label": label,
+                },
+                flow_create_params.FlowCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -323,7 +368,9 @@ class AsyncFlowsResource(AsyncAPIResource):
         flow_id: str,
         *,
         worker_id: str,
-        body: object,
+        code: str | NotGiven = NOT_GIVEN,
+        label: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -335,6 +382,12 @@ class AsyncFlowsResource(AsyncAPIResource):
         Update a flow
 
         Args:
+          code: Flow code
+
+          label: Optional label for the flow
+
+          name: Name of the flow
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -349,7 +402,14 @@ class AsyncFlowsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         return await self._put(
             f"/api/workers/{worker_id}/flows/{flow_id}",
-            body=await async_maybe_transform(body, flow_update_params.FlowUpdateParams),
+            body=await async_maybe_transform(
+                {
+                    "code": code,
+                    "label": label,
+                    "name": name,
+                },
+                flow_update_params.FlowUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

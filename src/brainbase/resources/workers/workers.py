@@ -74,7 +74,8 @@ class WorkersResource(SyncAPIResource):
     def create(
         self,
         *,
-        body: object,
+        name: str,
+        description: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -86,6 +87,10 @@ class WorkersResource(SyncAPIResource):
         Create a new worker
 
         Args:
+          name: Name of the worker
+
+          description: Description of the worker
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -96,7 +101,13 @@ class WorkersResource(SyncAPIResource):
         """
         return self._post(
             "/api/workers",
-            body=maybe_transform(body, worker_create_params.WorkerCreateParams),
+            body=maybe_transform(
+                {
+                    "name": name,
+                    "description": description,
+                },
+                worker_create_params.WorkerCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -140,7 +151,8 @@ class WorkersResource(SyncAPIResource):
         self,
         id: str,
         *,
-        body: object,
+        description: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -152,6 +164,10 @@ class WorkersResource(SyncAPIResource):
         Update a worker
 
         Args:
+          description: Description of the worker
+
+          name: Name of the worker
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -164,7 +180,13 @@ class WorkersResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._post(
             f"/api/workers/{id}",
-            body=maybe_transform(body, worker_update_params.WorkerUpdateParams),
+            body=maybe_transform(
+                {
+                    "description": description,
+                    "name": name,
+                },
+                worker_update_params.WorkerUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -256,7 +278,8 @@ class AsyncWorkersResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        body: object,
+        name: str,
+        description: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -268,6 +291,10 @@ class AsyncWorkersResource(AsyncAPIResource):
         Create a new worker
 
         Args:
+          name: Name of the worker
+
+          description: Description of the worker
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -278,7 +305,13 @@ class AsyncWorkersResource(AsyncAPIResource):
         """
         return await self._post(
             "/api/workers",
-            body=await async_maybe_transform(body, worker_create_params.WorkerCreateParams),
+            body=await async_maybe_transform(
+                {
+                    "name": name,
+                    "description": description,
+                },
+                worker_create_params.WorkerCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -322,7 +355,8 @@ class AsyncWorkersResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        body: object,
+        description: str | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -334,6 +368,10 @@ class AsyncWorkersResource(AsyncAPIResource):
         Update a worker
 
         Args:
+          description: Description of the worker
+
+          name: Name of the worker
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -346,7 +384,13 @@ class AsyncWorkersResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._post(
             f"/api/workers/{id}",
-            body=await async_maybe_transform(body, worker_update_params.WorkerUpdateParams),
+            body=await async_maybe_transform(
+                {
+                    "description": description,
+                    "name": name,
+                },
+                worker_update_params.WorkerUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
