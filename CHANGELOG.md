@@ -1,5 +1,25 @@
 # Changelog
 
+## 4.1.0 (2025-02-14)
+
+Full Changelog: [v4.0.0...v4.1.0](https://github.com/BrainbaseHQ/brainbase-python-sdk/compare/v4.0.0...v4.1.0)
+
+### Features
+
+* **api:** update via SDK Studio ([#61](https://github.com/BrainbaseHQ/brainbase-python-sdk/issues/61)) ([9c0c551](https://github.com/BrainbaseHQ/brainbase-python-sdk/commit/9c0c551d114f385be676f42aab844de1309b9406))
+* **client:** send `X-Stainless-Read-Timeout` header ([#63](https://github.com/BrainbaseHQ/brainbase-python-sdk/issues/63)) ([a594c75](https://github.com/BrainbaseHQ/brainbase-python-sdk/commit/a594c7501a919a038a7b4d08754ee837acd45b89))
+
+
+### Bug Fixes
+
+* asyncify on non-asyncio runtimes ([#66](https://github.com/BrainbaseHQ/brainbase-python-sdk/issues/66)) ([ca310cd](https://github.com/BrainbaseHQ/brainbase-python-sdk/commit/ca310cd8beb201d9ad2c66ab13c1e0ed605e6a91))
+
+
+### Chores
+
+* **internal:** fix type traversing dictionary params ([#64](https://github.com/BrainbaseHQ/brainbase-python-sdk/issues/64)) ([1322c80](https://github.com/BrainbaseHQ/brainbase-python-sdk/commit/1322c808afea9e8d17ac958e289850115c8d0fe8))
+* **internal:** minor type handling changes ([#65](https://github.com/BrainbaseHQ/brainbase-python-sdk/issues/65)) ([7e69125](https://github.com/BrainbaseHQ/brainbase-python-sdk/commit/7e691251edd799b8ffd067792c0833f99a6906bb))
+
 ## 4.0.0 (2025-02-04)
 
 Full Changelog: [v3.0.0...v4.0.0](https://github.com/BrainbaseHQ/brainbase-python-sdk/compare/v3.0.0...v4.0.0)

@@ -26,19 +26,14 @@ Methods:
 Types:
 
 ```python
-from brainbase.types.workers.deployments import (
-    VoiceCreateResponse,
-    VoiceRetrieveResponse,
-    VoiceUpdateResponse,
-    VoiceListResponse,
-)
+from brainbase.types.workers.deployments import VoiceDeployment, VoiceListResponse
 ```
 
 Methods:
 
-- <code title="post /api/workers/{workerId}/deployments/voice">client.workers.deployments.voice.<a href="./src/brainbase/resources/workers/deployments/voice.py">create</a>(worker_id, \*\*<a href="src/brainbase/types/workers/deployments/voice_create_params.py">params</a>) -> <a href="./src/brainbase/types/workers/deployments/voice_create_response.py">VoiceCreateResponse</a></code>
-- <code title="get /api/workers/{workerId}/deployments/voice/{deploymentId}">client.workers.deployments.voice.<a href="./src/brainbase/resources/workers/deployments/voice.py">retrieve</a>(deployment_id, \*, worker_id) -> <a href="./src/brainbase/types/workers/deployments/voice_retrieve_response.py">VoiceRetrieveResponse</a></code>
-- <code title="put /api/workers/{workerId}/deployments/voice/{deploymentId}">client.workers.deployments.voice.<a href="./src/brainbase/resources/workers/deployments/voice.py">update</a>(deployment_id, \*, worker_id, \*\*<a href="src/brainbase/types/workers/deployments/voice_update_params.py">params</a>) -> <a href="./src/brainbase/types/workers/deployments/voice_update_response.py">VoiceUpdateResponse</a></code>
+- <code title="post /api/workers/{workerId}/deployments/voice">client.workers.deployments.voice.<a href="./src/brainbase/resources/workers/deployments/voice.py">create</a>(worker_id, \*\*<a href="src/brainbase/types/workers/deployments/voice_create_params.py">params</a>) -> <a href="./src/brainbase/types/workers/deployments/voice_deployment.py">VoiceDeployment</a></code>
+- <code title="get /api/workers/{workerId}/deployments/voice/{deploymentId}">client.workers.deployments.voice.<a href="./src/brainbase/resources/workers/deployments/voice.py">retrieve</a>(deployment_id, \*, worker_id) -> <a href="./src/brainbase/types/workers/deployments/voice_deployment.py">VoiceDeployment</a></code>
+- <code title="put /api/workers/{workerId}/deployments/voice/{deploymentId}">client.workers.deployments.voice.<a href="./src/brainbase/resources/workers/deployments/voice.py">update</a>(deployment_id, \*, worker_id, \*\*<a href="src/brainbase/types/workers/deployments/voice_update_params.py">params</a>) -> <a href="./src/brainbase/types/workers/deployments/voice_deployment.py">VoiceDeployment</a></code>
 - <code title="get /api/workers/{workerId}/deployments/voice">client.workers.deployments.voice.<a href="./src/brainbase/resources/workers/deployments/voice.py">list</a>(worker_id) -> <a href="./src/brainbase/types/workers/deployments/voice_list_response.py">VoiceListResponse</a></code>
 - <code title="delete /api/workers/{workerId}/deployments/voice/{deploymentId}">client.workers.deployments.voice.<a href="./src/brainbase/resources/workers/deployments/voice.py">delete</a>(deployment_id, \*, worker_id) -> None</code>
 

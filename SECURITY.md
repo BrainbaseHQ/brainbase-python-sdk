@@ -20,7 +20,7 @@ or products provided by Brainbase please follow the respective company's securit
 
 ### Brainbase Terms and Policies
 
-Please contact dev@brainbase.com for any questions or concerns regarding security of our services.
+Please contact dev-feedback@brainbase.com for any questions or concerns regarding security of our services.
 
 ---
 
