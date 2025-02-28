@@ -76,7 +76,7 @@ class Brainbase(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous brainbase client instance.
+        """Construct a new synchronous Brainbase client instance.
 
         This automatically infers the `api_key` argument from the `API_KEY` environment variable if it is not provided.
         """
@@ -244,7 +244,7 @@ class AsyncBrainbase(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async brainbase client instance.
+        """Construct a new async AsyncBrainbase client instance.
 
         This automatically infers the `api_key` argument from the `API_KEY` environment variable if it is not provided.
         """
