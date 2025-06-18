@@ -24,7 +24,6 @@ from pydantic import ValidationError
 from brainbase import Brainbase, AsyncBrainbase, APIResponseValidationError
 from brainbase._types import Omit
 from brainbase._models import BaseModel, FinalRequestOptions
-from brainbase._constants import RAW_RESPONSE_HEADER
 from brainbase._exceptions import APIStatusError, BrainbaseError, APITimeoutError, APIResponseValidationError
 from brainbase._base_client import (
     DEFAULT_TIMEOUT,
@@ -713,26 +712,21 @@ class TestBrainbase:
 
     @mock.patch("brainbase._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Brainbase) -> None:
         respx_mock.get("/api/workers").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.get(
-                "/api/workers", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
-            )
+            client.workers.with_streaming_response.list().__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("brainbase._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Brainbase) -> None:
         respx_mock.get("/api/workers").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.get(
-                "/api/workers", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
-            )
-
+            client.workers.with_streaming_response.list().__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1532,26 +1526,25 @@ class TestAsyncBrainbase:
 
     @mock.patch("brainbase._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_timeout_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncBrainbase
+    ) -> None:
         respx_mock.get("/api/workers").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.get(
-                "/api/workers", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
-            )
+            await async_client.workers.with_streaming_response.list().__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("brainbase._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_status_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncBrainbase
+    ) -> None:
         respx_mock.get("/api/workers").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.get(
-                "/api/workers", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
-            )
-
+            await async_client.workers.with_streaming_response.list().__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
