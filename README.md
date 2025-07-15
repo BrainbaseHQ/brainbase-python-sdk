@@ -77,7 +77,6 @@ pip install brainbase-labs[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
-import os
 import asyncio
 from brainbase import DefaultAioHttpClient
 from brainbase import AsyncBrainbase
@@ -85,7 +84,7 @@ from brainbase import AsyncBrainbase
 
 async def main() -> None:
     async with AsyncBrainbase(
-        api_key=os.environ.get("API_KEY"),  # This is the default and can be omitted
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         workers = await client.workers.list()
