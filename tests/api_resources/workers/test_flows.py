@@ -22,7 +22,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestFlows:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Brainbase) -> None:
         flow = client.workers.flows.create(
@@ -32,7 +32,7 @@ class TestFlows:
         )
         assert_matches_type(FlowCreateResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Brainbase) -> None:
         flow = client.workers.flows.create(
@@ -43,7 +43,7 @@ class TestFlows:
         )
         assert_matches_type(FlowCreateResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Brainbase) -> None:
         response = client.workers.flows.with_raw_response.create(
@@ -57,7 +57,7 @@ class TestFlows:
         flow = response.parse()
         assert_matches_type(FlowCreateResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Brainbase) -> None:
         with client.workers.flows.with_streaming_response.create(
@@ -73,7 +73,7 @@ class TestFlows:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_create(self, client: Brainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -83,7 +83,7 @@ class TestFlows:
                 name="name",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Brainbase) -> None:
         flow = client.workers.flows.retrieve(
@@ -92,7 +92,7 @@ class TestFlows:
         )
         assert_matches_type(FlowRetrieveResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Brainbase) -> None:
         response = client.workers.flows.with_raw_response.retrieve(
@@ -105,7 +105,7 @@ class TestFlows:
         flow = response.parse()
         assert_matches_type(FlowRetrieveResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Brainbase) -> None:
         with client.workers.flows.with_streaming_response.retrieve(
@@ -120,7 +120,7 @@ class TestFlows:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Brainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -135,7 +135,7 @@ class TestFlows:
                 worker_id="workerId",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: Brainbase) -> None:
         flow = client.workers.flows.update(
@@ -144,7 +144,7 @@ class TestFlows:
         )
         assert_matches_type(FlowUpdateResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Brainbase) -> None:
         flow = client.workers.flows.update(
@@ -156,7 +156,7 @@ class TestFlows:
         )
         assert_matches_type(FlowUpdateResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Brainbase) -> None:
         response = client.workers.flows.with_raw_response.update(
@@ -169,7 +169,7 @@ class TestFlows:
         flow = response.parse()
         assert_matches_type(FlowUpdateResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Brainbase) -> None:
         with client.workers.flows.with_streaming_response.update(
@@ -184,7 +184,7 @@ class TestFlows:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Brainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -199,7 +199,7 @@ class TestFlows:
                 worker_id="workerId",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Brainbase) -> None:
         flow = client.workers.flows.list(
@@ -207,7 +207,7 @@ class TestFlows:
         )
         assert_matches_type(FlowListResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Brainbase) -> None:
         response = client.workers.flows.with_raw_response.list(
@@ -219,7 +219,7 @@ class TestFlows:
         flow = response.parse()
         assert_matches_type(FlowListResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Brainbase) -> None:
         with client.workers.flows.with_streaming_response.list(
@@ -233,7 +233,7 @@ class TestFlows:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_list(self, client: Brainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -241,7 +241,7 @@ class TestFlows:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Brainbase) -> None:
         flow = client.workers.flows.delete(
@@ -250,7 +250,7 @@ class TestFlows:
         )
         assert flow is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Brainbase) -> None:
         response = client.workers.flows.with_raw_response.delete(
@@ -263,7 +263,7 @@ class TestFlows:
         flow = response.parse()
         assert flow is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Brainbase) -> None:
         with client.workers.flows.with_streaming_response.delete(
@@ -278,7 +278,7 @@ class TestFlows:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Brainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -299,7 +299,7 @@ class TestAsyncFlows:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncBrainbase) -> None:
         flow = await async_client.workers.flows.create(
@@ -309,7 +309,7 @@ class TestAsyncFlows:
         )
         assert_matches_type(FlowCreateResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncBrainbase) -> None:
         flow = await async_client.workers.flows.create(
@@ -320,7 +320,7 @@ class TestAsyncFlows:
         )
         assert_matches_type(FlowCreateResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.flows.with_raw_response.create(
@@ -334,7 +334,7 @@ class TestAsyncFlows:
         flow = await response.parse()
         assert_matches_type(FlowCreateResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.flows.with_streaming_response.create(
@@ -350,7 +350,7 @@ class TestAsyncFlows:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_create(self, async_client: AsyncBrainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -360,7 +360,7 @@ class TestAsyncFlows:
                 name="name",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBrainbase) -> None:
         flow = await async_client.workers.flows.retrieve(
@@ -369,7 +369,7 @@ class TestAsyncFlows:
         )
         assert_matches_type(FlowRetrieveResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.flows.with_raw_response.retrieve(
@@ -382,7 +382,7 @@ class TestAsyncFlows:
         flow = await response.parse()
         assert_matches_type(FlowRetrieveResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.flows.with_streaming_response.retrieve(
@@ -397,7 +397,7 @@ class TestAsyncFlows:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncBrainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -412,7 +412,7 @@ class TestAsyncFlows:
                 worker_id="workerId",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncBrainbase) -> None:
         flow = await async_client.workers.flows.update(
@@ -421,7 +421,7 @@ class TestAsyncFlows:
         )
         assert_matches_type(FlowUpdateResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncBrainbase) -> None:
         flow = await async_client.workers.flows.update(
@@ -433,7 +433,7 @@ class TestAsyncFlows:
         )
         assert_matches_type(FlowUpdateResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.flows.with_raw_response.update(
@@ -446,7 +446,7 @@ class TestAsyncFlows:
         flow = await response.parse()
         assert_matches_type(FlowUpdateResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.flows.with_streaming_response.update(
@@ -461,7 +461,7 @@ class TestAsyncFlows:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncBrainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -476,7 +476,7 @@ class TestAsyncFlows:
                 worker_id="workerId",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncBrainbase) -> None:
         flow = await async_client.workers.flows.list(
@@ -484,7 +484,7 @@ class TestAsyncFlows:
         )
         assert_matches_type(FlowListResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.flows.with_raw_response.list(
@@ -496,7 +496,7 @@ class TestAsyncFlows:
         flow = await response.parse()
         assert_matches_type(FlowListResponse, flow, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.flows.with_streaming_response.list(
@@ -510,7 +510,7 @@ class TestAsyncFlows:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_list(self, async_client: AsyncBrainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -518,7 +518,7 @@ class TestAsyncFlows:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncBrainbase) -> None:
         flow = await async_client.workers.flows.delete(
@@ -527,7 +527,7 @@ class TestAsyncFlows:
         )
         assert flow is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.flows.with_raw_response.delete(
@@ -540,7 +540,7 @@ class TestAsyncFlows:
         flow = await response.parse()
         assert flow is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.flows.with_streaming_response.delete(
@@ -555,7 +555,7 @@ class TestAsyncFlows:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncBrainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
