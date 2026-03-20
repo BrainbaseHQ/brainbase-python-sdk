@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -79,7 +79,7 @@ class FlowsResource(SyncAPIResource):
         if not worker_id:
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         return self._post(
-            f"/api/workers/{worker_id}/flows",
+            path_template("/api/workers/{worker_id}/flows", worker_id=worker_id),
             body=maybe_transform(
                 {
                     "code": code,
@@ -123,7 +123,7 @@ class FlowsResource(SyncAPIResource):
         if not flow_id:
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         return self._get(
-            f"/api/workers/{worker_id}/flows/{flow_id}",
+            path_template("/api/workers/{worker_id}/flows/{flow_id}", worker_id=worker_id, flow_id=flow_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -168,7 +168,7 @@ class FlowsResource(SyncAPIResource):
         if not flow_id:
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         return self._put(
-            f"/api/workers/{worker_id}/flows/{flow_id}",
+            path_template("/api/workers/{worker_id}/flows/{flow_id}", worker_id=worker_id, flow_id=flow_id),
             body=maybe_transform(
                 {
                     "code": code,
@@ -209,7 +209,7 @@ class FlowsResource(SyncAPIResource):
         if not worker_id:
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         return self._get(
-            f"/api/workers/{worker_id}/flows",
+            path_template("/api/workers/{worker_id}/flows", worker_id=worker_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -246,7 +246,7 @@ class FlowsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/api/workers/{worker_id}/flows/{flow_id}",
+            path_template("/api/workers/{worker_id}/flows/{flow_id}", worker_id=worker_id, flow_id=flow_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -309,7 +309,7 @@ class AsyncFlowsResource(AsyncAPIResource):
         if not worker_id:
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         return await self._post(
-            f"/api/workers/{worker_id}/flows",
+            path_template("/api/workers/{worker_id}/flows", worker_id=worker_id),
             body=await async_maybe_transform(
                 {
                     "code": code,
@@ -353,7 +353,7 @@ class AsyncFlowsResource(AsyncAPIResource):
         if not flow_id:
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         return await self._get(
-            f"/api/workers/{worker_id}/flows/{flow_id}",
+            path_template("/api/workers/{worker_id}/flows/{flow_id}", worker_id=worker_id, flow_id=flow_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -398,7 +398,7 @@ class AsyncFlowsResource(AsyncAPIResource):
         if not flow_id:
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         return await self._put(
-            f"/api/workers/{worker_id}/flows/{flow_id}",
+            path_template("/api/workers/{worker_id}/flows/{flow_id}", worker_id=worker_id, flow_id=flow_id),
             body=await async_maybe_transform(
                 {
                     "code": code,
@@ -439,7 +439,7 @@ class AsyncFlowsResource(AsyncAPIResource):
         if not worker_id:
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         return await self._get(
-            f"/api/workers/{worker_id}/flows",
+            path_template("/api/workers/{worker_id}/flows", worker_id=worker_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -476,7 +476,7 @@ class AsyncFlowsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/api/workers/{worker_id}/flows/{flow_id}",
+            path_template("/api/workers/{worker_id}/flows/{flow_id}", worker_id=worker_id, flow_id=flow_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
