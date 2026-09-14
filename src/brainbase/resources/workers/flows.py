@@ -4,11 +4,8 @@ from __future__ import annotations
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
-from ..._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -53,13 +50,13 @@ class FlowsResource(SyncAPIResource):
         *,
         code: str,
         name: str,
-        label: str | NotGiven = NOT_GIVEN,
+        label: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FlowCreateResponse:
         """
         Create a new flow
@@ -82,7 +79,7 @@ class FlowsResource(SyncAPIResource):
         if not worker_id:
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         return self._post(
-            f"/api/workers/{worker_id}/flows",
+            path_template("/api/workers/{worker_id}/flows", worker_id=worker_id),
             body=maybe_transform(
                 {
                     "code": code,
@@ -107,7 +104,7 @@ class FlowsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FlowRetrieveResponse:
         """
         Get a single flow
@@ -126,7 +123,7 @@ class FlowsResource(SyncAPIResource):
         if not flow_id:
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         return self._get(
-            f"/api/workers/{worker_id}/flows/{flow_id}",
+            path_template("/api/workers/{worker_id}/flows/{flow_id}", worker_id=worker_id, flow_id=flow_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -138,15 +135,15 @@ class FlowsResource(SyncAPIResource):
         flow_id: str,
         *,
         worker_id: str,
-        code: str | NotGiven = NOT_GIVEN,
-        label: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
+        code: str | Omit = omit,
+        label: str | Omit = omit,
+        name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FlowUpdateResponse:
         """
         Update a flow
@@ -171,7 +168,7 @@ class FlowsResource(SyncAPIResource):
         if not flow_id:
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         return self._put(
-            f"/api/workers/{worker_id}/flows/{flow_id}",
+            path_template("/api/workers/{worker_id}/flows/{flow_id}", worker_id=worker_id, flow_id=flow_id),
             body=maybe_transform(
                 {
                     "code": code,
@@ -195,7 +192,7 @@ class FlowsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FlowListResponse:
         """
         Get all flows for a worker
@@ -212,7 +209,7 @@ class FlowsResource(SyncAPIResource):
         if not worker_id:
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         return self._get(
-            f"/api/workers/{worker_id}/flows",
+            path_template("/api/workers/{worker_id}/flows", worker_id=worker_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -229,7 +226,7 @@ class FlowsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete a flow
@@ -249,7 +246,7 @@ class FlowsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/api/workers/{worker_id}/flows/{flow_id}",
+            path_template("/api/workers/{worker_id}/flows/{flow_id}", worker_id=worker_id, flow_id=flow_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -283,13 +280,13 @@ class AsyncFlowsResource(AsyncAPIResource):
         *,
         code: str,
         name: str,
-        label: str | NotGiven = NOT_GIVEN,
+        label: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FlowCreateResponse:
         """
         Create a new flow
@@ -312,7 +309,7 @@ class AsyncFlowsResource(AsyncAPIResource):
         if not worker_id:
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         return await self._post(
-            f"/api/workers/{worker_id}/flows",
+            path_template("/api/workers/{worker_id}/flows", worker_id=worker_id),
             body=await async_maybe_transform(
                 {
                     "code": code,
@@ -337,7 +334,7 @@ class AsyncFlowsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FlowRetrieveResponse:
         """
         Get a single flow
@@ -356,7 +353,7 @@ class AsyncFlowsResource(AsyncAPIResource):
         if not flow_id:
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         return await self._get(
-            f"/api/workers/{worker_id}/flows/{flow_id}",
+            path_template("/api/workers/{worker_id}/flows/{flow_id}", worker_id=worker_id, flow_id=flow_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -368,15 +365,15 @@ class AsyncFlowsResource(AsyncAPIResource):
         flow_id: str,
         *,
         worker_id: str,
-        code: str | NotGiven = NOT_GIVEN,
-        label: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
+        code: str | Omit = omit,
+        label: str | Omit = omit,
+        name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FlowUpdateResponse:
         """
         Update a flow
@@ -401,7 +398,7 @@ class AsyncFlowsResource(AsyncAPIResource):
         if not flow_id:
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         return await self._put(
-            f"/api/workers/{worker_id}/flows/{flow_id}",
+            path_template("/api/workers/{worker_id}/flows/{flow_id}", worker_id=worker_id, flow_id=flow_id),
             body=await async_maybe_transform(
                 {
                     "code": code,
@@ -425,7 +422,7 @@ class AsyncFlowsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FlowListResponse:
         """
         Get all flows for a worker
@@ -442,7 +439,7 @@ class AsyncFlowsResource(AsyncAPIResource):
         if not worker_id:
             raise ValueError(f"Expected a non-empty value for `worker_id` but received {worker_id!r}")
         return await self._get(
-            f"/api/workers/{worker_id}/flows",
+            path_template("/api/workers/{worker_id}/flows", worker_id=worker_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -459,7 +456,7 @@ class AsyncFlowsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Delete a flow
@@ -479,7 +476,7 @@ class AsyncFlowsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `flow_id` but received {flow_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/api/workers/{worker_id}/flows/{flow_id}",
+            path_template("/api/workers/{worker_id}/flows/{flow_id}", worker_id=worker_id, flow_id=flow_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

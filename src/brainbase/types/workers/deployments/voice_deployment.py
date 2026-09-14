@@ -6,10 +6,10 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = ["VoiceRetrieveResponse"]
+__all__ = ["VoiceDeployment"]
 
 
-class VoiceRetrieveResponse(BaseModel):
+class VoiceDeployment(BaseModel):
     id: str
 
     delegate_aux_deployments_id: Optional[str] = FieldInfo(alias="delegate_aux_deploymentsId", default=None)

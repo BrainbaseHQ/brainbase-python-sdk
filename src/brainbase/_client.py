@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Union, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -11,18 +11,20 @@ import httpx
 from . import _exceptions
 from ._qs import Querystring
 from ._types import (
-    NOT_GIVEN,
     Omit,
     Timeout,
     NotGiven,
     Transport,
     ProxiesTypes,
     RequestOptions,
+    not_given,
 )
 from ._utils import (
     is_given,
+    is_mapping_t,
     get_async_library,
 )
+from ._compat import cached_property
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, BrainbaseError
@@ -31,7 +33,10 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.workers import workers
+
+if TYPE_CHECKING:
+    from .resources import workers
+    from .resources.workers.workers import WorkersResource, AsyncWorkersResource
 
 __all__ = [
     "Timeout",
@@ -46,10 +51,6 @@ __all__ = [
 
 
 class Brainbase(SyncAPIClient):
-    workers: workers.WorkersResource
-    with_raw_response: BrainbaseWithRawResponse
-    with_streaming_response: BrainbaseWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -58,7 +59,7 @@ class Brainbase(SyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -76,7 +77,7 @@ class Brainbase(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous brainbase client instance.
+        """Construct a new synchronous Brainbase client instance.
 
         This automatically infers the `api_key` argument from the `API_KEY` environment variable if it is not provided.
         """
@@ -93,6 +94,15 @@ class Brainbase(SyncAPIClient):
         if base_url is None:
             base_url = f"/api"
 
+        custom_headers_env = os.environ.get("BRAINBASE_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -104,9 +114,19 @@ class Brainbase(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.workers = workers.WorkersResource(self)
-        self.with_raw_response = BrainbaseWithRawResponse(self)
-        self.with_streaming_response = BrainbaseWithStreamedResponse(self)
+    @cached_property
+    def workers(self) -> WorkersResource:
+        from .resources.workers import WorkersResource
+
+        return WorkersResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> BrainbaseWithRawResponse:
+        return BrainbaseWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> BrainbaseWithStreamedResponse:
+        return BrainbaseWithStreamedResponse(self)
 
     @property
     @override
@@ -133,9 +153,9 @@ class Brainbase(SyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -214,10 +234,6 @@ class Brainbase(SyncAPIClient):
 
 
 class AsyncBrainbase(AsyncAPIClient):
-    workers: workers.AsyncWorkersResource
-    with_raw_response: AsyncBrainbaseWithRawResponse
-    with_streaming_response: AsyncBrainbaseWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -226,7 +242,7 @@ class AsyncBrainbase(AsyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -244,7 +260,7 @@ class AsyncBrainbase(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async brainbase client instance.
+        """Construct a new async AsyncBrainbase client instance.
 
         This automatically infers the `api_key` argument from the `API_KEY` environment variable if it is not provided.
         """
@@ -261,6 +277,15 @@ class AsyncBrainbase(AsyncAPIClient):
         if base_url is None:
             base_url = f"/api"
 
+        custom_headers_env = os.environ.get("BRAINBASE_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -272,9 +297,19 @@ class AsyncBrainbase(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.workers = workers.AsyncWorkersResource(self)
-        self.with_raw_response = AsyncBrainbaseWithRawResponse(self)
-        self.with_streaming_response = AsyncBrainbaseWithStreamedResponse(self)
+    @cached_property
+    def workers(self) -> AsyncWorkersResource:
+        from .resources.workers import AsyncWorkersResource
+
+        return AsyncWorkersResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncBrainbaseWithRawResponse:
+        return AsyncBrainbaseWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncBrainbaseWithStreamedResponse:
+        return AsyncBrainbaseWithStreamedResponse(self)
 
     @property
     @override
@@ -301,9 +336,9 @@ class AsyncBrainbase(AsyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -382,23 +417,55 @@ class AsyncBrainbase(AsyncAPIClient):
 
 
 class BrainbaseWithRawResponse:
+    _client: Brainbase
+
     def __init__(self, client: Brainbase) -> None:
-        self.workers = workers.WorkersResourceWithRawResponse(client.workers)
+        self._client = client
+
+    @cached_property
+    def workers(self) -> workers.WorkersResourceWithRawResponse:
+        from .resources.workers import WorkersResourceWithRawResponse
+
+        return WorkersResourceWithRawResponse(self._client.workers)
 
 
 class AsyncBrainbaseWithRawResponse:
+    _client: AsyncBrainbase
+
     def __init__(self, client: AsyncBrainbase) -> None:
-        self.workers = workers.AsyncWorkersResourceWithRawResponse(client.workers)
+        self._client = client
+
+    @cached_property
+    def workers(self) -> workers.AsyncWorkersResourceWithRawResponse:
+        from .resources.workers import AsyncWorkersResourceWithRawResponse
+
+        return AsyncWorkersResourceWithRawResponse(self._client.workers)
 
 
 class BrainbaseWithStreamedResponse:
+    _client: Brainbase
+
     def __init__(self, client: Brainbase) -> None:
-        self.workers = workers.WorkersResourceWithStreamingResponse(client.workers)
+        self._client = client
+
+    @cached_property
+    def workers(self) -> workers.WorkersResourceWithStreamingResponse:
+        from .resources.workers import WorkersResourceWithStreamingResponse
+
+        return WorkersResourceWithStreamingResponse(self._client.workers)
 
 
 class AsyncBrainbaseWithStreamedResponse:
+    _client: AsyncBrainbase
+
     def __init__(self, client: AsyncBrainbase) -> None:
-        self.workers = workers.AsyncWorkersResourceWithStreamingResponse(client.workers)
+        self._client = client
+
+    @cached_property
+    def workers(self) -> workers.AsyncWorkersResourceWithStreamingResponse:
+        from .resources.workers import AsyncWorkersResourceWithStreamingResponse
+
+        return AsyncWorkersResourceWithStreamingResponse(self._client.workers)
 
 
 Client = Brainbase

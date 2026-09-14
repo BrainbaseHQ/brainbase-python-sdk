@@ -1,16 +1,17 @@
 # Brainbase Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/brainbase-labs.svg)](https://pypi.org/project/brainbase-labs/)
+<!-- prettier-ignore -->
+[![PyPI version](https://img.shields.io/pypi/v/brainbase-labs.svg?label=pypi%20(stable))](https://pypi.org/project/brainbase-labs/)
 
-The Brainbase Python library provides convenient access to the Brainbase REST API from any Python 3.8+
+The Brainbase Python library provides convenient access to the Brainbase REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [docs.usebrainbase.xyz](https://docs.usebrainbase.xyz). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.usebrainbase.com](https://docs.usebrainbase.com). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
@@ -61,6 +62,37 @@ asyncio.run(main())
 ```
 
 Functionality between the synchronous and asynchronous clients is otherwise identical.
+
+### With aiohttp
+
+By default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.
+
+You can enable this by installing `aiohttp`:
+
+```sh
+# install from PyPI
+pip install brainbase-labs[aiohttp]
+```
+
+Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
+
+```python
+import os
+import asyncio
+from brainbase import DefaultAioHttpClient
+from brainbase import AsyncBrainbase
+
+
+async def main() -> None:
+    async with AsyncBrainbase(
+        api_key=os.environ.get("API_KEY"),  # This is the default and can be omitted
+        http_client=DefaultAioHttpClient(),
+    ) as client:
+        workers = await client.workers.list()
+
+
+asyncio.run(main())
+```
 
 ## Using types
 
@@ -136,7 +168,7 @@ client.with_options(max_retries=5).workers.list()
 ### Timeouts
 
 By default requests time out after 1 minute. You can configure this with a `timeout` option,
-which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
+which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
 from brainbase import Brainbase
@@ -322,7 +354,7 @@ print(brainbase.__version__)
 
 ## Requirements
 
-Python 3.8 or higher.
+Python 3.9 or higher.
 
 ## Contributing
 

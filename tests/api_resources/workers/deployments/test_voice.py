@@ -10,10 +10,8 @@ import pytest
 from brainbase import Brainbase, AsyncBrainbase
 from tests.utils import assert_matches_type
 from brainbase.types.workers.deployments import (
+    VoiceDeployment,
     VoiceListResponse,
-    VoiceCreateResponse,
-    VoiceUpdateResponse,
-    VoiceRetrieveResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -22,16 +20,16 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestVoice:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Brainbase) -> None:
         voice = client.workers.deployments.voice.create(
             worker_id="workerId",
             name="name",
         )
-        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Brainbase) -> None:
         voice = client.workers.deployments.voice.create(
@@ -41,9 +39,9 @@ class TestVoice:
             voice_id="voiceId",
             voice_provider="voiceProvider",
         )
-        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Brainbase) -> None:
         response = client.workers.deployments.voice.with_raw_response.create(
@@ -54,9 +52,9 @@ class TestVoice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         voice = response.parse()
-        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Brainbase) -> None:
         with client.workers.deployments.voice.with_streaming_response.create(
@@ -67,11 +65,11 @@ class TestVoice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             voice = response.parse()
-            assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+            assert_matches_type(VoiceDeployment, voice, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_create(self, client: Brainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -80,16 +78,16 @@ class TestVoice:
                 name="name",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Brainbase) -> None:
         voice = client.workers.deployments.voice.retrieve(
             deployment_id="deploymentId",
             worker_id="workerId",
         )
-        assert_matches_type(VoiceRetrieveResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Brainbase) -> None:
         response = client.workers.deployments.voice.with_raw_response.retrieve(
@@ -100,9 +98,9 @@ class TestVoice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         voice = response.parse()
-        assert_matches_type(VoiceRetrieveResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Brainbase) -> None:
         with client.workers.deployments.voice.with_streaming_response.retrieve(
@@ -113,11 +111,11 @@ class TestVoice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             voice = response.parse()
-            assert_matches_type(VoiceRetrieveResponse, voice, path=["response"])
+            assert_matches_type(VoiceDeployment, voice, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Brainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -132,7 +130,7 @@ class TestVoice:
                 worker_id="workerId",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Brainbase) -> None:
         voice = client.workers.deployments.voice.update(
@@ -140,9 +138,9 @@ class TestVoice:
             worker_id="workerId",
             name="name",
         )
-        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Brainbase) -> None:
         voice = client.workers.deployments.voice.update(
@@ -153,9 +151,9 @@ class TestVoice:
             voice_id="voiceId",
             voice_provider="voiceProvider",
         )
-        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Brainbase) -> None:
         response = client.workers.deployments.voice.with_raw_response.update(
@@ -167,9 +165,9 @@ class TestVoice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         voice = response.parse()
-        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Brainbase) -> None:
         with client.workers.deployments.voice.with_streaming_response.update(
@@ -181,11 +179,11 @@ class TestVoice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             voice = response.parse()
-            assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+            assert_matches_type(VoiceDeployment, voice, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Brainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -202,7 +200,7 @@ class TestVoice:
                 name="name",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Brainbase) -> None:
         voice = client.workers.deployments.voice.list(
@@ -210,7 +208,7 @@ class TestVoice:
         )
         assert_matches_type(VoiceListResponse, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Brainbase) -> None:
         response = client.workers.deployments.voice.with_raw_response.list(
@@ -222,7 +220,7 @@ class TestVoice:
         voice = response.parse()
         assert_matches_type(VoiceListResponse, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Brainbase) -> None:
         with client.workers.deployments.voice.with_streaming_response.list(
@@ -236,7 +234,7 @@ class TestVoice:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_list(self, client: Brainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -244,7 +242,7 @@ class TestVoice:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Brainbase) -> None:
         voice = client.workers.deployments.voice.delete(
@@ -253,7 +251,7 @@ class TestVoice:
         )
         assert voice is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Brainbase) -> None:
         response = client.workers.deployments.voice.with_raw_response.delete(
@@ -266,7 +264,7 @@ class TestVoice:
         voice = response.parse()
         assert voice is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Brainbase) -> None:
         with client.workers.deployments.voice.with_streaming_response.delete(
@@ -281,7 +279,7 @@ class TestVoice:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Brainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -298,18 +296,20 @@ class TestVoice:
 
 
 class TestAsyncVoice:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncBrainbase) -> None:
         voice = await async_client.workers.deployments.voice.create(
             worker_id="workerId",
             name="name",
         )
-        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncBrainbase) -> None:
         voice = await async_client.workers.deployments.voice.create(
@@ -319,9 +319,9 @@ class TestAsyncVoice:
             voice_id="voiceId",
             voice_provider="voiceProvider",
         )
-        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.deployments.voice.with_raw_response.create(
@@ -332,9 +332,9 @@ class TestAsyncVoice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         voice = await response.parse()
-        assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.deployments.voice.with_streaming_response.create(
@@ -345,11 +345,11 @@ class TestAsyncVoice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             voice = await response.parse()
-            assert_matches_type(VoiceCreateResponse, voice, path=["response"])
+            assert_matches_type(VoiceDeployment, voice, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_create(self, async_client: AsyncBrainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -358,16 +358,16 @@ class TestAsyncVoice:
                 name="name",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncBrainbase) -> None:
         voice = await async_client.workers.deployments.voice.retrieve(
             deployment_id="deploymentId",
             worker_id="workerId",
         )
-        assert_matches_type(VoiceRetrieveResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.deployments.voice.with_raw_response.retrieve(
@@ -378,9 +378,9 @@ class TestAsyncVoice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         voice = await response.parse()
-        assert_matches_type(VoiceRetrieveResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.deployments.voice.with_streaming_response.retrieve(
@@ -391,11 +391,11 @@ class TestAsyncVoice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             voice = await response.parse()
-            assert_matches_type(VoiceRetrieveResponse, voice, path=["response"])
+            assert_matches_type(VoiceDeployment, voice, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncBrainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -410,7 +410,7 @@ class TestAsyncVoice:
                 worker_id="workerId",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncBrainbase) -> None:
         voice = await async_client.workers.deployments.voice.update(
@@ -418,9 +418,9 @@ class TestAsyncVoice:
             worker_id="workerId",
             name="name",
         )
-        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncBrainbase) -> None:
         voice = await async_client.workers.deployments.voice.update(
@@ -431,9 +431,9 @@ class TestAsyncVoice:
             voice_id="voiceId",
             voice_provider="voiceProvider",
         )
-        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.deployments.voice.with_raw_response.update(
@@ -445,9 +445,9 @@ class TestAsyncVoice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         voice = await response.parse()
-        assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+        assert_matches_type(VoiceDeployment, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.deployments.voice.with_streaming_response.update(
@@ -459,11 +459,11 @@ class TestAsyncVoice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             voice = await response.parse()
-            assert_matches_type(VoiceUpdateResponse, voice, path=["response"])
+            assert_matches_type(VoiceDeployment, voice, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncBrainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -480,7 +480,7 @@ class TestAsyncVoice:
                 name="name",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncBrainbase) -> None:
         voice = await async_client.workers.deployments.voice.list(
@@ -488,7 +488,7 @@ class TestAsyncVoice:
         )
         assert_matches_type(VoiceListResponse, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.deployments.voice.with_raw_response.list(
@@ -500,7 +500,7 @@ class TestAsyncVoice:
         voice = await response.parse()
         assert_matches_type(VoiceListResponse, voice, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.deployments.voice.with_streaming_response.list(
@@ -514,7 +514,7 @@ class TestAsyncVoice:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_list(self, async_client: AsyncBrainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
@@ -522,7 +522,7 @@ class TestAsyncVoice:
                 "",
             )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncBrainbase) -> None:
         voice = await async_client.workers.deployments.voice.delete(
@@ -531,7 +531,7 @@ class TestAsyncVoice:
         )
         assert voice is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncBrainbase) -> None:
         response = await async_client.workers.deployments.voice.with_raw_response.delete(
@@ -544,7 +544,7 @@ class TestAsyncVoice:
         voice = await response.parse()
         assert voice is None
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncBrainbase) -> None:
         async with async_client.workers.deployments.voice.with_streaming_response.delete(
@@ -559,7 +559,7 @@ class TestAsyncVoice:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncBrainbase) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `worker_id` but received ''"):
